@@ -1,6 +1,6 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 :root {
   --background: #ffffff;
@@ -14,24 +14,89 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  background-color:#f0e3ec;
+
+}
+/*Boton----------------------------------------------------*/
 .boton{
-  background-color: purple;
-  color: #ededed;
+  font-size: 20px;
+  background-color: #0037f5;
+  color: #f0e3ec;
   padding: 20px;
   text-align: center;
   transition: all 0.5s ease;
-  border-radius: 20px;
-  border: 2px solid purple;
+  border-radius: 10px;
+  border: 2px solid #0037f5
 }
 
 .boton:hover{
-  background-color: #ededed;
-  color: purple;
-  border: 2px solid purple;
+  background-color: #f0e3ec;
+  color: #0037f5;
+  border: 2px solid #0037f5;
+}
+
+/*task----------------------------------------------------*/
+
+.task{
+  display: flex;
+  flex-direction: row;
+  margin: 30px;
+  background-color: #0037f5;
+  color: #f0e3ec;
+  width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+}
+
+.task h2,h4{
+  text-decoration: none;
+}
+
+.task > .boton{
+  width: 200px;
+  text-decoration: none;
+  border: 1px solid white;
+  margin-top: 10px;
+
+}
+
+.task > .boton:hover{
+  border: 1px solid #f0e3ec;
+  margin-top: 10px;
+  color: #0037f5;
+  background-color: #f0e3ec;
+
+}
+
+.doneTask{
+  display: flex;
+  flex-direction: row;
+  margin: 30px;
+  background-color: #00186d;
+  color: #f0e3ec;
+  width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.doneTask h2 {
+  text-decoration: line-through;
+}
+
+.doneTask > .boton{
+  width: 200px;
+  text-decoration: none;
+  border: 1px solid #f0e3ec;
+  margin-top: 10px;
+  color: #0037f5;
+  background-color: #f0e3ec;
+
 }
