@@ -22,10 +22,34 @@
 
 body {
   background-color:#f0e3ec;
-
 }
+
+.contenidoPrincipal{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 100vh;
+}
+
+.contenidoPrincipal aside{
+  padding: 40px;
+  width: 60%;
+  background-color: #0037f5;
+  height: 100%;
+}
+
+.contenidoPrincipal section{
+  padding: 40px;
+  background-color: #151b31;
+  height: 100%;
+  width: 90%;
+}
+
+
+
 /*Boton----------------------------------------------------*/
 .boton{
+  width:200px;
   font-size: 20px;
   background-color: #0037f5;
   color: #f0e3ec;
@@ -61,7 +85,6 @@ body {
 }
 
 .task > .boton{
-  width: 200px;
   text-decoration: none;
   border: 1px solid white;
   margin-top: 10px;
@@ -85,6 +108,7 @@ body {
   width: 400px;
   padding: 20px;
   border-radius: 10px;
+  transition: all 0.5s ease;
 }
 
 .doneTask h2 {
@@ -92,7 +116,6 @@ body {
 }
 
 .doneTask > .boton{
-  width: 200px;
   text-decoration: none;
   border: 1px solid #f0e3ec;
   margin-top: 10px;
