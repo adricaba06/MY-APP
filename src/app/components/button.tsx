@@ -1,4 +1,5 @@
 import React from 'react';
+import Task from './task';
 // Definir la interfaz para las props
 
 //Primero vamos a crear una interface que defina las properties del boton
@@ -10,6 +11,8 @@ interface ButtonProps {
 }
 
 //una vez creada la interfaz vamos a declarar el componente y exportarlo por su puesto
+
+
 
 export default function Button({contenido, onClick}:ButtonProps){ //recuerda decir el tipo, TypeScript es titismiquis
     return(

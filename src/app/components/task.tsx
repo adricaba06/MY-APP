@@ -10,6 +10,8 @@ interface taskProps{
     
 }
 
+
+
 export default function Task({title, description}: taskProps) { // recordar poner las props
 
     const[done, setDone] = useState(true); //¿como usar useSte? primero voy a poner esto

@@ -59,7 +59,7 @@ h1, h2{
 
 .contenidoPrincipal section{
   padding: 40px;
-  background-image: linear-gradient(to bottom, #006C67 20%, #028079 50%, #008f88 80%);
+  background-image: linear-gradient(to bottom, #006C67 20%, #027973 50%, #029991 80%);
   height: 100%;
   width: 90%;
 }
@@ -110,7 +110,7 @@ footer{
 .task > .boton{
   margin-left: 10px;
   text-decoration: none;
-  border: 1px solid white;
+  border: 1px solid #FFEBC6;
   margin-top: 10px;
 
 }
@@ -155,7 +155,7 @@ footer{
 .recuadroTareas{
   background-color: transparent;
   border-radius: 10px;
-  border: 1px solid white;
+  border: 1px solid #FFEBC6;
   padding: 30px;
 
 }

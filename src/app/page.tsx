@@ -1,7 +1,13 @@
 "use client";
 
 import Button from "./components/button";  // Importación de Button
+import Form from "./components/Form";
 import Task from "./components/task";      // Importación de Task
+
+
+
+
+
 
 export default function Home() {
   return (
@@ -26,6 +32,9 @@ export default function Home() {
               <Task title="Deberes" description="Hacer tarea de mates"></Task>
               <Task title="Deberes" description="Hacer tarea de mates"></Task>
               <Task title="Deberes" description="Hacer tarea de mates"></Task>
+            </div>
+            <div>
+              <Form></Form>
             </div>
           </section>
 
