@@ -10,7 +10,6 @@ interface taskProps{
     
 }
 
-
 export default function Task({title, description}: taskProps) { // recordar poner las props
 
     const[done, setDone] = useState(true); //¿como usar useSte? primero voy a poner esto
@@ -24,8 +23,9 @@ export default function Task({title, description}: taskProps) { // recordar pone
             <div>
                 <h2>{title}</h2>
                 <h4>{description}</h4>
+                
             </div>
-            <Button contenido={done? "Set as done" : "✔️"} onClick={changeDone}></Button>
+            <Button contenido={done? "Set as done" : "Done !"} onClick={changeDone}></Button>
 
     </div>
   )

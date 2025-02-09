@@ -14,6 +14,11 @@
   }
 }
 
+@font-face {
+  font-family: 'normal';
+  src: url(../app/ContenidoEstilos/ModernAesthetic-DemoVersion-Regular.otf);
+}
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -21,7 +26,20 @@
 }
 
 body {
-  background-color:#f0e3ec;
+ background-color: #006C67;
+
+}
+
+h1{
+
+  font-size: 50px;
+  color: #FFEBC6;
+
+}
+
+h1, h2{
+  font-family: 'normal';
+  font-weight: lighter;
 }
 
 .contenidoPrincipal{
@@ -33,37 +51,42 @@ body {
 
 .contenidoPrincipal aside{
   padding: 40px;
-  width: 60%;
-  background-color: #0037f5;
+  width: 20%;
+  background-color: #FFEBC6;
   height: 100%;
+  border-top-right-radius: 50px;
 }
 
 .contenidoPrincipal section{
   padding: 40px;
-  background-color: #151b31;
+  background-image: linear-gradient(to bottom, #006C67 20%, #028079 50%, #008f88 80%);
   height: 100%;
   width: 90%;
 }
 
-
+footer{
+  background-color: #171717;
+}
 
 /*Boton----------------------------------------------------*/
 .boton{
+  font-family: 'normal';
+  font-weight: lighter;
   width:200px;
   font-size: 20px;
-  background-color: #0037f5;
-  color: #f0e3ec;
+  background-color: #DB7F67;
+  color: #FFEBC6;
   padding: 20px;
   text-align: center;
   transition: all 0.5s ease;
   border-radius: 10px;
-  border: 2px solid #0037f5
+  border: 2px solid #DB7F67
 }
 
 .boton:hover{
-  background-color: #f0e3ec;
-  color: #0037f5;
-  border: 2px solid #0037f5;
+  background-color: #FFEBC6;
+  color: #DB7F67;
+  border: 2px solid #DB7F67;
 }
 
 /*task----------------------------------------------------*/
@@ -72,8 +95,8 @@ body {
   display: flex;
   flex-direction: row;
   margin: 30px;
-  background-color: #0037f5;
-  color: #f0e3ec;
+  background-color: #DB7F67;
+  color: #FFEBC6;
   width: 400px;
   padding: 20px;
   border-radius: 10px;
@@ -85,6 +108,7 @@ body {
 }
 
 .task > .boton{
+  margin-left: 10px;
   text-decoration: none;
   border: 1px solid white;
   margin-top: 10px;
@@ -92,10 +116,10 @@ body {
 }
 
 .task > .boton:hover{
-  border: 1px solid #f0e3ec;
+  border: 1px solid #FFEBC6;
   margin-top: 10px;
-  color: #0037f5;
-  background-color: #f0e3ec;
+  color: #DB7F67;
+  background-color: #FFEBC6;
 
 }
 
@@ -103,8 +127,8 @@ body {
   display: flex;
   flex-direction: row;
   margin: 30px;
-  background-color: #00186d;
-  color: #f0e3ec;
+  background-color: #A37B73;
+  color: #FFEBC6;
   width: 400px;
   padding: 20px;
   border-radius: 10px;
@@ -116,10 +140,22 @@ body {
 }
 
 .doneTask > .boton{
+  margin-left: 100px;
+  width: fit-content;
   text-decoration: none;
-  border: 1px solid #f0e3ec;
+  border: 1px solid #FFEBC6;
   margin-top: 10px;
-  color: #0037f5;
-  background-color: #f0e3ec;
+  color: #DB7F67;
+  background-color: #FFEBC6;
+
+}
+
+/*Recuadro-------------------------*/
+
+.recuadroTareas{
+  background-color: transparent;
+  border-radius: 10px;
+  border: 1px solid white;
+  padding: 30px;
 
 }
