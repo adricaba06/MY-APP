@@ -4,13 +4,14 @@ import Button from './button';
 
 
 
-interface taskProps{
+ export interface taskProps{
     title: string;
     description: string;
+    id: number;
 }
 
 
-export default function Task({title, description}: taskProps) { // recordar poner las props
+export default function Task({title, description,id}: taskProps) { // recordar poner las props
 
     const[done, setDone] = useState(true); //¿como usar useSte? primero voy a poner esto
 

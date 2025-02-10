@@ -1,6 +1,7 @@
 import { useState } from "react"
 import React from 'react'
 
+
 export default function Form() {
 
     const [values, setValues] = useState({ //en vez de poner dos useSte hemos puesto solo uno
@@ -39,10 +40,10 @@ export default function Form() {
         placeholder="Add a Description"
         />
 
-        <button>
+        <button className="Form-button">
             submit
         </button>
     </form>
-    
+
   )
 }

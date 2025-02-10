@@ -170,7 +170,7 @@ footer{
 
 .popup{
   background-image: linear-gradient(to bottom, #027973 50%, #029991 80%);
-  border: 1px solid FFEBC6;
+  border: 1px solid #FFEBC6;
   border-radius: 6px;
   width: 30%;
   height: 40%;
@@ -195,5 +195,26 @@ input {
   color: #DB7F67;             /* Color del texto dentro del input */
 }
 
+.Form-button{
+  font-family: 'normal';
+  margin-top: 20px;
+  font-weight: lighter;
+  width:200px;
+  font-size: 20px;
+  background-color: #DB7F67;
+  color: #FFEBC6;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.5s ease;
+  border-radius: 10px;
+  border: 2px solid #DB7F67
 
+}
+
+.Form-button:hover{
+  background-color: transparent;
+  color: #DB7F67;
+  border: 2px solid #DB7F67;
+
+}
 
