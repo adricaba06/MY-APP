@@ -6,7 +6,7 @@ import Task from './task';
 
 interface ButtonProps {
 
-    contenido: React.ReactNode; //antes era un String, ahora practicamnete podría colocar cualquier elemento como un svg
+    children: React.ReactNode; //antes era un String, ahora practicamnete podría colocar cualquier elemento como un svg
     onClick: () => void; //es una funcion por lo cual debo de poner asi la sintaxis
 }
 
@@ -14,10 +14,12 @@ interface ButtonProps {
 
 
 
-export default function Button({contenido, onClick}:ButtonProps){ //recuerda decir el tipo, TypeScript es titismiquis
+export default function Button({children, onClick}:ButtonProps){ //recuerda decir el tipo, TypeScript es titismiquis
+
+    console.log(children)
     return(
         <button onClick={onClick} className='boton'>
-            {contenido}
+            {children} 
         </button>
     );
 }

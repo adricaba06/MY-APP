@@ -159,3 +159,41 @@ footer{
   padding: 30px;
 
 }
+
+.popup-visible{
+  display: block;
+}
+
+.popup-invisible{
+  display: none;
+}
+
+.popup{
+  background-image: linear-gradient(to bottom, #027973 50%, #029991 80%);
+  border: 1px solid FFEBC6;
+  border-radius: 6px;
+  width: 30%;
+  height: 40%;
+  padding: 30px;
+  margin: auto;
+
+  position: fixed;
+  top: 10%;       /* Posiciónalo en el 50% desde la parte superior */
+  left: 40%;      /* Posiciónalo en el 50% desde la parte izquierda */
+
+}
+
+input {
+  font-family: 'normal';
+  margin-top: 30px;
+  font-size: 16px;         /* Cambiar el tamaño de la fuente */
+  padding: 10px;           /* Cambiar el relleno dentro del input */
+  border-radius: 5px;      /* Bordes redondeados */
+  border: 2px solid #DB7F67; /* Color y grosor del borde */
+  width: 100%;             /* Establecer un ancho del 100% */
+  background-color: white; /* Color de fondo */
+  color: #DB7F67;             /* Color del texto dentro del input */
+}
+
+
+

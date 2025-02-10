@@ -7,9 +7,7 @@ import Button from './button';
 interface taskProps{
     title: string;
     description: string;
-    
 }
-
 
 
 export default function Task({title, description}: taskProps) { // recordar poner las props
@@ -27,8 +25,7 @@ export default function Task({title, description}: taskProps) { // recordar pone
                 <h4>{description}</h4>
                 
             </div>
-            <Button contenido={done? "Set as done" : "Done !"} onClick={changeDone}></Button>
-
+            <Button onClick={changeDone}>{done? "Set as done" : "Done !"}</Button>
     </div>
   )
 }
