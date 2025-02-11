@@ -110,7 +110,10 @@ footer{
  .task h2, h4{
   flex: 1;
   text-decoration: none;
-  
+}
+
+.task h4{
+  overflow: hidden;
 }
 
 .task > .boton {
@@ -125,19 +128,23 @@ footer{
 
 .task > .boton:hover{
   border: 1px solid #FFEBC6;
-  margin-top: 10px;
   color: #DB7F67;
   background-color: #FFEBC6;
 
 }
 
 .doneTask{
+
   display: flex;
-  flex-direction: row;
-  margin: 30px;
+  flex-direction: column;
+  
+  margin-left: 20px;
+  margin-bottom:20px ;
   background-color: #A37B73;
   color: #FFEBC6;
-  width: 400px;
+  width: 30%;
+  min-height: 50%;
+  height: 50%;
   padding: 20px;
   border-radius: 10px;
   transition: all 0.5s ease;
@@ -147,14 +154,14 @@ footer{
   text-decoration: line-through;
 }
 
+
 .doneTask > .boton{
-  margin-left: 100px;
-  width: fit-content;
-  text-decoration: none;
   border: 1px solid #FFEBC6;
-  margin-top: 10px;
   color: #DB7F67;
   background-color: #FFEBC6;
+
+  height: 60px;
+  width: 95%;
 
 }
 
