@@ -93,29 +93,35 @@ footer{
 
 .task{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   
   margin-left: 20px;
   margin-bottom:20px ;
   background-color: #DB7F67;
   color: #FFEBC6;
-  width: fit-content;
+  width: 30%;
+  min-height: 50%;
+  height: 50%;
   padding: 20px;
   border-radius: 10px;
   transition: all 0.5s ease;
 }
 
-.task h2,h4{
+ .task h2, h4{
+  flex: 1;
   text-decoration: none;
+  
 }
 
-.task > .boton{
-  margin-left: 10px;
+.task > .boton {
+  margin-top: 30px;
+  margin-right: 20px; 
+  height: 60px;
+  width: 95%;
   text-decoration: none;
   border: 1px solid #FFEBC6;
-  margin-top: 10px;
-
 }
+
 
 .task > .boton:hover{
   border: 1px solid #FFEBC6;

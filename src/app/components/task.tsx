@@ -24,9 +24,10 @@ export default function Task({title, description,id}: taskProps) { // recordar p
             <div>
                 <h2>{title}</h2>
                 <h4>{description}</h4>
-                
             </div>
+            
             <Button onClick={changeDone}>{done? "Set as done" : "Done !"}</Button>
+           
     </div>
   )
 }

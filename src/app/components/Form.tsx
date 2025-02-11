@@ -35,6 +35,7 @@ export default function Form({submit, onClick}: formProps) {
         <input
         type="text"
         name="title"
+        maxLength={16}
         value={values.title}
         onChange={handleInpunt}
         placeholder="Task Name"
@@ -44,6 +45,7 @@ export default function Form({submit, onClick}: formProps) {
         <input
         type="text"
         name="description"
+        maxLength={94}
         value={values.description}
         onChange={handleInpunt}
         placeholder="Add a Description"
