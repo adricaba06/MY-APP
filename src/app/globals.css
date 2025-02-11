@@ -94,10 +94,12 @@ footer{
 .task{
   display: flex;
   flex-direction: row;
-  margin: 30px;
+  
+  margin-left: 20px;
+  margin-bottom:20px ;
   background-color: #DB7F67;
   color: #FFEBC6;
-  width: 400px;
+  width: fit-content;
   padding: 20px;
   border-radius: 10px;
   transition: all 0.5s ease;
@@ -153,6 +155,10 @@ footer{
 /*Recuadro-------------------------*/
 
 .recuadroTareas{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   background-color: transparent;
   border-radius: 10px;
   border: 1px solid #FFEBC6;

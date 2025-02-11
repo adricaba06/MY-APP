@@ -5,6 +5,7 @@ import Button from './button';
 interface popUpProps{
     isVisible: boolean;
     children: React.ReactNode; //Los componentes se pasan de esta forma, tener en cuenta
+    
 }
 
 export default function PopUp({children, isVisible}: popUpProps){

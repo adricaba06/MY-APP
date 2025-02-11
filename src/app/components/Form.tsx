@@ -1,8 +1,14 @@
-import { useState } from "react"
+import { act, useState } from "react"
 import React from 'react'
 
 
-export default function Form() {
+interface formProps{
+    submit: (title: string, description: string) => void;
+    onClick: () => void;
+}
+
+
+export default function Form({submit, onClick}: formProps) {
 
     const [values, setValues] = useState({ //en vez de poner dos useSte hemos puesto solo uno
         title: "", //valores iniciales
@@ -19,17 +25,20 @@ export default function Form() {
 
     }
 
-    const handleForm = (event: React.ChangeEvent<HTMLInputElement>) => event.preventDefault(); //la página no se refrescará
+    const handleForm = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault(); // Esto evitará que la página se recargue
+      };
 
   return (
 
-    <form>
+    <form onSubmit={handleForm}>
         <input
         type="text"
         name="title"
         value={values.title}
         onChange={handleInpunt}
         placeholder="Task Name"
+        id="input1"
         />
 
         <input
@@ -38,12 +47,15 @@ export default function Form() {
         value={values.description}
         onChange={handleInpunt}
         placeholder="Add a Description"
+        id="input2"
         />
 
-        <button className="Form-button">
+        <button className="Form-button"  onClick={() => {
+            submit(values.title, values.description);  
+            onClick();  // Llama a la otra función
+        }}>
             submit
         </button>
     </form>
-
   )
 }

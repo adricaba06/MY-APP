@@ -7,7 +7,7 @@ import Button from './button';
  export interface taskProps{
     title: string;
     description: string;
-    id: number;
+    id: string;
 }
 
 

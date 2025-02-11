@@ -6,16 +6,23 @@ import Task from "./components/task";      // Importación de Task
 import PopUp from "./components/popUp";
 import { useState } from "react";
 import { taskProps } from "./components/task";
+import { v4 as uuidv4 } from "uuid";
+
 
 export default function Home() {
 
-  const [taskList, setTaskList] = useState<Array<taskProps>>([]);
-  let contador: number;
-  contador = 0;
+  const [taskList, setTaskList] = useState<Array<taskProps>>([{
+    id:"1",
+    title: "Tarea",
+    description: "Hacer mates"
+  }]);
+
+  
 
   const addTask = (title: string, description: string) => {
+
     const newTask = {
-      id: contador++,
+      id: uuidv4(),
       title,
       description,
     };
@@ -23,7 +30,7 @@ export default function Home() {
     setTaskList([...taskList, newTask]);
   };
 
-  const deleteTask = (id: number) => {
+  const deleteTask = (id: string) => {
     let index = -1;
     for (let i = 0; i < taskList.length; i++) {
       if (taskList[i].id === id) {
@@ -37,6 +44,10 @@ export default function Home() {
     }
   }
 
+  const showList = () => taskList.map((task) => (<Task key={task.id} {...task}/>));
+  
+
+
     const [visible, setVisible] = useState(false);
     const changeVisibility = () => setVisible(!visible);
 
@@ -48,16 +59,17 @@ export default function Home() {
             <div className="contenidoPrincipal">
               <aside>
                 <div>
-                  <PopUp isVisible={visible}>
-                      <Form/>
-                  </PopUp>
+                 
                   <Button onClick={() => changeVisibility()}>
                     <p>New Task</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
                     </svg>
-
                   </Button>
+
+                  <PopUp isVisible={visible}>
+                  <Form submit={(title, description) => addTask(title, description)} onClick={changeVisibility}/>
+                  </PopUp>
                   
 
                 </div>
@@ -67,10 +79,11 @@ export default function Home() {
               <section>
 
                 <h1>Task Manager</h1>
-                <div className="recuadroTareas"> //TEMPORAL
-                  <Task title="Deberes" description="Hacer tarea de mates" id={1}></Task>
+                <div className="recuadroTareas">
+                  {showList()}
+                  {/* <Task title="Deberes" description="Hacer tarea de mates" id={1}></Task>
                   <Task title="Deberes" description="Hacer tarea de mates" id={2}></Task>
-                  <Task title="Deberes" description="Hacer tarea de mates" id={3}></Task>
+                  <Task title="Deberes" description="Hacer tarea de mates" id={3}></Task> */}
                 </div>
               </section>
 
