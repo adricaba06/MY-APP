@@ -4,11 +4,10 @@ import React from 'react'
 
 interface formProps{
     submit: (title: string, description: string) => void;
-    onClick: () => void;
 }
 
 
-export default function Form({submit, onClick}: formProps) {
+export default function Form({submit}: formProps) {
 
     const [values, setValues] = useState({ //en vez de poner dos useSte hemos puesto solo uno
         title: "", //valores iniciales
@@ -38,7 +37,7 @@ export default function Form({submit, onClick}: formProps) {
         maxLength={16}
         value={values.title}
         onChange={handleInpunt}
-        placeholder="Task Name"
+        required placeholder="Task Name"
         id="input1"
         />
 
@@ -54,7 +53,7 @@ export default function Form({submit, onClick}: formProps) {
 
         <button className="Form-button"  onClick={() => {
             submit(values.title, values.description);  
-            onClick();  // Llama a la otra función
+            // Llama a la otra función
         }}>
             submit
         </button>

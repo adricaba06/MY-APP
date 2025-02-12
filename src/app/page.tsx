@@ -2,54 +2,65 @@
 
 import Button from "./components/button";  // Importación de Button
 import Form from "./components/Form";
-import Task from "./components/task";      // Importación de Task
+import {TaskComponent} from "./components/task";      // Importación de Task
 import PopUp from "./components/popUp";
 import { useState } from "react";
-import { taskProps } from "./components/task";
+import { TaskProps, Task } from "./components/task";
 import { v4 as uuidv4 } from "uuid";
 
 
 export default function Home() {
 
-  const [taskList, setTaskList] = useState<Array<taskProps>>([{
+  const [taskList, setTaskList] = useState<Array<Task>>([{
     id:"1",
     title: "Tarea",
-    description: "Hacer mates"
+    description: "Hacer mates",
+    selecionada: false,
+    
   }]);
 
   
 
-  const addTask = (title: string, description: string) => {
+  const addTask = (title: string, description: string, selecionada: boolean) => {
 
     const newTask = {
       id: uuidv4(),
       title,
       description,
+      selecionada,
+      
     };
 
     setTaskList([...taskList, newTask]);
   };
 
-  const deleteTask = (id: string) => {
-    let index = -1;
-    for (let i = 0; i < taskList.length; i++) {
-      if (taskList[i].id === id) {
-        index = i;
-      }
-
-      if (index !== -1) {
-        setTaskList(taskList.splice(index, 1));
-      }
-
-    }
+  let deleteTask = () => {
+    const updatedTaskList = taskList.filter(task => !task.selecionada);
+    setTaskList(updatedTaskList);
   }
 
-  const showList = () => taskList.map((task) => (<Task key={task.id} {...task}/>));
+  const showList = () => taskList.map((task) => (<TaskComponent key={task.id} {...task} changeSelect={id => setTaskList(taskList.map(task => task.id === id ? {...task, selecionada : ! task.selecionada} : task))} />));
   
 
+  const getSelectedTarget = () => {
+    for(let i = 0; i<taskList.length; i++){
+      if(taskList[i].selecionada){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+  }
 
     const [visible, setVisible] = useState(false);
     const changeVisibility = () => setVisible(!visible);
+
+    const handleSubmit = (title: string, description: string) => {
+      addTask(title, description,false);
+      changeVisibility();
+    }
+
 
     return (
       <>
@@ -67,11 +78,16 @@ export default function Home() {
                     </svg>
                   </Button>
 
-                  <PopUp isVisible={visible}>
-                  <Form submit={(title, description) => addTask(title, description)} onClick={changeVisibility}/>
-                  </PopUp>
-                  
+                  <Button onClick={deleteTask}>
+                      Eliminar tarea
+                  </Button>
 
+
+
+                  <PopUp isVisible={visible}>
+                  <Form submit={handleSubmit} /> //revisar
+                  </PopUp>
+                
                 </div>
 
               </aside>
@@ -81,9 +97,6 @@ export default function Home() {
                 <h1>Task Manager</h1>
                 <div className="recuadroTareas">
                   {showList()}
-                  {/* <Task title="Deberes" description="Hacer tarea de mates" id={1}></Task>
-                  <Task title="Deberes" description="Hacer tarea de mates" id={2}></Task>
-                  <Task title="Deberes" description="Hacer tarea de mates" id={3}></Task> */}
                 </div>
               </section>
 
