@@ -4,7 +4,7 @@ import Button from "./components/button";
 import Form from "./components/Form";
 import { TaskComponent } from "./components/task";     
 import PopUp from "./components/popUp";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Task } from "./components/task";
 import { v4 as uuidv4 } from "uuid";
 
@@ -15,9 +15,11 @@ export default function Home() {
       title: "Tarea",
       description: "Hacer mates",
       selecionada: false,
-      done: false, // Añadido para evitar errores
+      done: false,  // Agregado "done" para controlar el estado de completado
     },
   ]);
+
+   
 
   const addTask = (title: string, description: string, selecionada: boolean) => {
     const newTask: Task = {
@@ -25,16 +27,16 @@ export default function Home() {
       title,
       description,
       selecionada,
-      done: false, // Añadido
+      done: false,  // Nueva tarea comienza como no completada
     };
 
     setTaskList([...taskList, newTask]);
   };
 
   const deleteTask = () => {
-    const updatedTaskList = taskList.filter(task => !task.selecionada);
-    setTaskList(updatedTaskList);
+    setTaskList(taskList.filter(task => !task.selecionada));
   };
+
 
   const toggleDone = (id: string) => {
     setTaskList(taskList.map(task =>
@@ -42,7 +44,33 @@ export default function Home() {
     ));
   };
 
-  const filteredTasks = taskList; // Aquí puedes aplicar filtros si quieres
+
+  enum Filter {
+    All,
+    Done,
+    NotDone
+  }
+  const [filter, setFilter] = useState<Filter>(Filter.All);
+
+  // ✅ Función para filtrar tareas según el estado
+  function filterList(tasks: Task[], filter: Filter): Task[] {
+    switch (filter) {
+      case Filter.All:
+        return tasks;
+      case Filter.Done:
+        return tasks.filter(task => task.done === true);
+      case Filter.NotDone:
+        return tasks.filter(task => task.done === false);
+      default:
+        throw new Error("Invalid filter");
+    }
+  }
+
+  const [filteredTasks, setFilteredTasks] = useState<Task[]>(taskList);
+
+  useEffect(() => {
+    setFilteredTasks(filterList(taskList, filter));
+  }, [taskList, filter]);
 
   const showList = () => filteredTasks.map(task => (
     <TaskComponent
@@ -53,7 +81,7 @@ export default function Home() {
           task.id === id ? { ...task, selecionada: !task.selecionada } : task
         ))
       }
-      toggleDone={toggleDone}  
+      toggleDone={toggleDone}  // Pasamos toggleDone al componente TaskComponent
     />
   ));
 
@@ -84,6 +112,11 @@ export default function Home() {
                 <PopUp isVisible={visible}>
                   <Form submit={handleSubmit} />
                 </PopUp>
+
+                {/* Botones para cambiar el filtro */}
+                <Button onClick={() => setFilter(Filter.All)}>Todas</Button>
+                <Button onClick={() => setFilter(Filter.Done)}>Completadas</Button>
+                <Button onClick={() => setFilter(Filter.NotDone)}>Pendientes</Button>
               </div>
             </aside>
 
