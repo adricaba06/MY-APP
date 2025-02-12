@@ -262,3 +262,11 @@ input {
   visibility: hidden;
   transition: all 0s ease-out;
 }
+
+.filtros{
+  margin-top: 20px;
+}
+
+.filtros > .boton{
+  margin-bottom:  20px;
+}

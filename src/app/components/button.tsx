@@ -1,5 +1,5 @@
 import React from 'react';
-import Task from './task';
+
 // Definir la interfaz para las props
 
 //Primero vamos a crear una interface que defina las properties del boton
