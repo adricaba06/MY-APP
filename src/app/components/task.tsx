@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "./button";
 
 export interface Task {
@@ -6,55 +6,41 @@ export interface Task {
   description: string;
   id: string;
   selecionada: boolean;
-
+  done: boolean;  // Nuevo campo
 }
 
 export interface TaskProps extends Task {
   changeSelect: (id: string) => void;
+  toggleDone: (id: string) => void;  
 }
 
+// Eliminé changeSelectionfromTask porque no se estaba usando correctamente
 
-const changeSelectionfromTask = ({ selecionada }: TaskProps): void => {
-  selecionada = true;
-};
-
-export function TaskComponent({
-  title,
-  description,
-  id,
-  selecionada,
-  changeSelect,
-
+export function TaskComponent({ 
+  title, 
+  description, 
+  id, 
+  selecionada, 
+  done, 
+  changeSelect, 
+  toggleDone 
 }: TaskProps) {
-  // recordar poner las props
-
-  const [done, setDone] = useState(true); //¿como usar useSte? primero voy a poner esto
-  const changeDone = () => setDone(!done);
-
-  // const [selected, setSelected] = useState(false);
-  // const changeSelection = () => setSelected(!selected);
 
   return (
-    <div
-      className={`${done ? "task" : "doneTask"} ${
-        selecionada ? "selected" : ""
-      }`}
-      onClick={() => changeSelect(id)}
-    >
+    <div className={`${done ? "doneTask" : "task"} ${selecionada ? "selected" : ""}`} 
+      onClick={() => changeSelect(id)}>
+      
       <div>
         <h2>{title}</h2>
         <h4>{description}</h4>
       </div>
-
-      <Button
-        onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
-          event.stopPropagation(); // Evita activar el click del div, lo he visto en internet
-          changeDone();
-        }}
-      >
-        {done ? "Set as done" : "Done !"}
+       
+      <Button onClick={(event) => {
+        event.stopPropagation(); 
+        toggleDone(id); 
+      }}>
+        {done ? "Done!" : "Set as done"}
       </Button>
-
     </div>
   );
 }
