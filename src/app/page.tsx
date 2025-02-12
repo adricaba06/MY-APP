@@ -16,10 +16,8 @@ export default function Home() {
     title: "Tarea",
     description: "Hacer mates",
     selecionada: false,
-    
   }]);
 
-  
 
   const addTask = (title: string, description: string, selecionada: boolean) => {
 
@@ -34,10 +32,24 @@ export default function Home() {
     setTaskList([...taskList, newTask]);
   };
 
+  //delete methods----------------------------------------
   let deleteTask = () => {
     const updatedTaskList = taskList.filter(task => !task.selecionada);
     setTaskList(updatedTaskList);
   }
+
+  let deleteCurrentTask = (id: string) =>{
+    let indice = -1;
+    for(let i = 0; i<taskList.length; i++){
+      if(taskList[i].id === id){
+        indice = i;
+      }
+      const updatedTaskList = taskList.splice(indice, 1);
+      setTaskList(updatedTaskList);
+    }
+  }
+  //delete methods----------------------------------------
+
 
   const showList = () => taskList.map((task) => (<TaskComponent key={task.id} {...task} changeSelect={id => setTaskList(taskList.map(task => task.id === id ? {...task, selecionada : ! task.selecionada} : task))} />));
   
@@ -82,10 +94,8 @@ export default function Home() {
                       Eliminar tarea
                   </Button>
 
-
-
                   <PopUp isVisible={visible}>
-                  <Form submit={handleSubmit} /> //revisar
+                  <Form submit={handleSubmit} /> 
                   </PopUp>
                 
                 </div>
