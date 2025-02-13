@@ -149,7 +149,7 @@ export default function Home() {
                     </svg>
                   </Button>
 
-                  <Button onClick={deleteTask}>Eliminar tarea</Button>
+                  <Button onClick={deleteTask}>Delete Task</Button>
                 </div>
 
                 {/* PopUp para agregar tarea */}
@@ -162,23 +162,26 @@ export default function Home() {
                   <form onSubmit={(e) => { e.preventDefault(); handleEditSubmit(currentTask.title, currentTask.description); }}>
                     <input 
                       type="text" 
+                      required
+                      maxLength={16}
                       value={currentTask.title} 
                       onChange={(e) => setCurrentTask({ ...currentTask, title: e.target.value })} 
                     />
                     <input 
                       type="text" 
+                      maxLength={94}
                       value={currentTask.description} 
                       onChange={(e) => setCurrentTask({ ...currentTask, description: e.target.value })} 
                     />
-                    <button type="submit" className="Form-button">Guardar cambios</button>
+                    <button type="submit" className="Form-button">Save Changes</button>
                   </form>
                 </PopUp>
 
                 {/* Botones para cambiar el filtro */}
                 <div className="filtros">
-                  <Button onClick={() => setFilter(Filter.All)}>Todas</Button>
-                  <Button onClick={() => setFilter(Filter.Done)}>Completadas</Button>
-                  <Button onClick={() => setFilter(Filter.NotDone)}>Pendientes</Button>
+                  <Button onClick={() => setFilter(Filter.All)}>All</Button>
+                  <Button onClick={() => setFilter(Filter.Done)}>Done</Button>
+                  <Button onClick={() => setFilter(Filter.NotDone)}>To Do</Button>
                 </div>
               </div>
             </aside>
