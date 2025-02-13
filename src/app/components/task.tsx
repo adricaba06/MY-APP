@@ -7,41 +7,51 @@ export interface Task {
   id: string;
   selecionada: boolean;
   done: boolean;
-  
 }
 
 export interface TaskProps extends Task {
   changeSelect: (id: string) => void;
-  toggleDone: (id: string) => void; 
+  toggleDone: (id: string) => void;
   remove: (id: string) => void;
 }
 
-export function TaskComponent({ 
-  title, 
-  description, 
-  id, 
-  selecionada, 
-  done, 
-  changeSelect, 
+export function TaskComponent({
+  title,
+  description,
+  id,
+  selecionada,
+  done,
+  changeSelect,
   toggleDone,
-  remove 
-
+  remove,
 }: TaskProps) {
-
   return (
-    <div className={`${done ? "doneTask" : "task"} ${selecionada ? "selected" : ""}`} 
-      onClick={() => changeSelect(id)}>
-      
+    <div
+      className={`${done ? "doneTask" : "task"} ${
+        selecionada ? "selected" : ""
+      }`}
+      onClick={() => changeSelect(id)}
+    >
       <div>
         <h2>{title}</h2>
         <h4>{description}</h4>
       </div>
-       
-      <Button onClick={(event) => {
-        event.stopPropagation(); 
-        toggleDone(id); 
-      }}>
+
+      <Button
+        onClick={(event) => {
+          event.stopPropagation();
+          toggleDone(id);
+        }}
+      >
         {done ? "Done!" : "Set as done"}
+      </Button>
+      <Button
+        onClick={(event) => {
+          event.stopPropagation();
+          remove(id); 
+        }}
+      >
+        Delete
       </Button>
     </div>
   );
