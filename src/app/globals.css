@@ -251,7 +251,9 @@ input {
   100% { transform: rotate(0deg); }
 }
 
-
+.principales > .boton{
+  margin-bottom: 10px;
+}
 .selected{
   display: inline-block;
   animation: shakeRotate 0.4s ease-in-out infinite;
@@ -268,7 +270,15 @@ input {
 }
 
 .filtros > .boton{
+  background-color: #A37B73;
+  border: 2px solid #A37B73;
   margin-bottom:  20px;
+}
+
+.filtros > .boton:hover{
+  background-color: #FFEBC6;
+  color: #A37B73;
+  border: 2px solid #A37B73;
 }
 
 /*DELETE AND MOD BUTTON--------------------------*/
