@@ -6,15 +6,15 @@ export interface Task {
   description: string;
   id: string;
   selecionada: boolean;
-  done: boolean;  // Nuevo campo
+  done: boolean;
+  
 }
 
 export interface TaskProps extends Task {
   changeSelect: (id: string) => void;
-  toggleDone: (id: string) => void;  
+  toggleDone: (id: string) => void; 
+  remove: (id: string) => void;
 }
-
-// Eliminé changeSelectionfromTask porque no se estaba usando correctamente
 
 export function TaskComponent({ 
   title, 
@@ -23,7 +23,9 @@ export function TaskComponent({
   selecionada, 
   done, 
   changeSelect, 
-  toggleDone 
+  toggleDone,
+  remove 
+
 }: TaskProps) {
 
   return (
