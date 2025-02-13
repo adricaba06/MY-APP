@@ -9,7 +9,15 @@ import { Task } from "./components/task";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Home() {
-  const [taskList, setTaskList] = useState<Array<Task>>([]);
+  const [taskList, setTaskList] = useState<Array<Task>>([
+    {
+      id: "1",
+      title: "Tarea de ejemplo",
+      description: "Esta es una tarea por defecto",
+      selecionada: false,
+      done: false
+    }
+  ]);
 
   const addTask = (title: string, description: string, selecionada: boolean) => {
     const newTask: Task = {

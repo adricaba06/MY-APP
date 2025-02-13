@@ -270,3 +270,22 @@ input {
 .filtros > .boton{
   margin-bottom:  20px;
 }
+
+/*DELETE AND MOD BUTTON--------------------------*/
+
+.delMod{
+  background-color: transparent;
+  width: fit-content;
+  color: #FFEBC6;
+  border: none;
+  margin-top: 10px; 
+  transition: all 0.5s;
+}
+
+.delMod:hover{
+  background-color: transparent;
+  width: fit-content;
+  color: #ff000d;
+  border: none;
+  margin-top: 10px; 
+}
