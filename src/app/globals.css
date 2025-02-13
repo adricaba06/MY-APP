@@ -289,3 +289,13 @@ input {
   border: none;
   margin-top: 10px; 
 }
+
+.acciones{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.acciones > .delMod{
+  margin-left: 10px;
+}

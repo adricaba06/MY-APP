@@ -25,7 +25,7 @@ export default function Home() {
       title,
       description,
       selecionada,
-      done: false,  // Nueva tarea comienza como no completada
+      done: false,  
     };
 
     setTaskList([...taskList, newTask]);
@@ -35,20 +35,33 @@ export default function Home() {
     setTaskList(taskList.filter(task => !task.selecionada));
   };
 
-  let deleteCurrentTask = (id: string) =>{
+  let modifyCurrentTask = (id: string, newTitle: string, newDescription: string) => {
+    setTaskList(
+      taskList.map(task => task.id === id
+        ? { ...task, title: newTitle, description: newDescription } : task
+      )
+    );
+  };
+
+  const handlemodification = (id: string, newTitle: string, newDescription: string) => {
+    changevispop2(); // Abre el PopUp de edición
+    setCurrentTask({ id, title: newTitle, description: newDescription }); // Asigna los valores a los inputs
+  };
+
+  let deleteCurrentTask = (id: string) => {
     let indice = -1;
-    for(let i = 0; i<taskList.length; i++){
-      if(taskList[i].id === id){
+    for (let i = 0; i < taskList.length; i++) {
+      if (taskList[i].id === id) {
         indice = i;
       }
       const updatedTaskList = [
-        ...taskList.slice(0, indice),  
+        ...taskList.slice(0, indice),
         ...taskList.slice(indice + 1)
       ];
-      
+
       setTaskList(updatedTaskList);
     }
-  } 
+  };
 
   const toggleDone = (id: string) => {
     setTaskList(taskList.map(task =>
@@ -56,12 +69,12 @@ export default function Home() {
     ));
   };
 
-
   enum Filter {
     All,
     Done,
     NotDone
   }
+
   const [filter, setFilter] = useState<Filter>(Filter.All);
 
   function filterList(tasks: Task[], filter: Filter): Task[] {
@@ -83,7 +96,6 @@ export default function Home() {
     setFilteredTasks(filterList(taskList, filter));
   }, [taskList, filter]);
 
-  /*Mostrar Lista------------------------------------------------*/
   const showList = () => filteredTasks.map(task => (
     <TaskComponent
       key={task.id}
@@ -93,18 +105,33 @@ export default function Home() {
           task.id === id ? { ...task, selecionada: !task.selecionada } : task
         ))
       }
-      toggleDone={toggleDone}  // Pasamos toggleDone al componente TaskComponent
+      toggleDone={toggleDone}
       remove={id => deleteCurrentTask(id)}
+      modify={id => handlemodification(id, task.title, task.description)} // Aqui paso la tarea para modificar
     />
   ));
-  /*Mostrar Lista------------------------------------------------*/
+
+  const [vispop2, setvispop2] = useState(false);
+  const changevispop2 = () => setvispop2(!vispop2);
 
   const [visible, setVisible] = useState(false);
   const changeVisibility = () => setVisible(!visible);
 
+  //ESTADO PARA EL PUÑETERO FORMULARIO
+  const [currentTask, setCurrentTask] = useState<{ id: string, title: string, description: string }>({
+    id: '',
+    title: '',
+    description: ''
+  });
+
   const handleSubmit = (title: string, description: string) => {
     addTask(title, description, false);
     changeVisibility();
+  };
+
+  const handleEditSubmit = (title: string, description: string) => {
+    modifyCurrentTask(currentTask.id, title, description); 
+    changevispop2(); 
   };
 
   return (
@@ -124,8 +151,27 @@ export default function Home() {
 
                   <Button onClick={deleteTask}>Eliminar tarea</Button>
                 </div>
+
+                {/* PopUp para agregar tarea */}
                 <PopUp isVisible={visible}>
                   <Form submit={handleSubmit} />
+                </PopUp>
+
+                {/* PopUp para modificar tarea, tiene formulario normal, no el mio */} 
+                <PopUp isVisible={vispop2}> {/*he visto esto en un video*/}
+                  <form onSubmit={(e) => { e.preventDefault(); handleEditSubmit(currentTask.title, currentTask.description); }}>
+                    <input 
+                      type="text" 
+                      value={currentTask.title} 
+                      onChange={(e) => setCurrentTask({ ...currentTask, title: e.target.value })} 
+                    />
+                    <input 
+                      type="text" 
+                      value={currentTask.description} 
+                      onChange={(e) => setCurrentTask({ ...currentTask, description: e.target.value })} 
+                    />
+                    <button type="submit">Guardar cambios</button>
+                  </form>
                 </PopUp>
 
                 {/* Botones para cambiar el filtro */}

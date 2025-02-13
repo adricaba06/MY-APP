@@ -1,25 +1,23 @@
-import React from 'react';
+import React from "react";
 
 // Definir la interfaz para las props
 
 //Primero vamos a crear una interface que defina las properties del boton
 
 interface ButtonProps {
-
-    children: React.ReactNode; //antes era un String, ahora practicamnete podría colocar cualquier elemento como un svg
-    onClick: (event: React.MouseEvent<HTMLButtonElement> ) => void; //es una funcion por lo cual debo de poner asi la sintaxis
+  children: React.ReactNode; //antes era un String, ahora practicamnete podría colocar cualquier elemento como un svg
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void; //es una funcion por lo cual debo de poner asi la sintaxis
 }
 
 //una vez creada la interfaz vamos a declarar el componente y exportarlo por su puesto
 
+export default function Button({ children, onClick }: ButtonProps) {
+  //recuerda decir el tipo, TypeScript es titismiquis
 
-export default function Button({children, onClick}:ButtonProps){ //recuerda decir el tipo, TypeScript es titismiquis
-
-    console.log(children)
-    return(
-        <button onClick={onClick} className='boton'>
-            {children} 
-        </button>
-    );
+  console.log(children);
+  return (
+    <button onClick={onClick} className="boton">
+      {children}
+    </button>
+  );
 }
-
