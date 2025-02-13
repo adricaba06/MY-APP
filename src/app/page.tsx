@@ -170,7 +170,7 @@ export default function Home() {
                       value={currentTask.description} 
                       onChange={(e) => setCurrentTask({ ...currentTask, description: e.target.value })} 
                     />
-                    <button type="submit">Guardar cambios</button>
+                    <button type="submit" className="Form-button">Guardar cambios</button>
                   </form>
                 </PopUp>
 
