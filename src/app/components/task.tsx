@@ -1,33 +1,46 @@
-import { title } from 'process';
-import React, { useState } from 'react'
-import Button from './button';
+import React from "react";
+import Button from "./button";
 
+export interface Task {
+  title: string;
+  description: string;
+  id: string;
+  selecionada: boolean;
+  done: boolean;
 
-
- export interface taskProps{
-    title: string;
-    description: string;
-    id: string;
 }
 
+export interface TaskProps extends Task {
+  changeSelect: (id: string) => void;
+  toggleDone: (id: string) => void;
+}
 
-export default function Task({title, description,id}: taskProps) { // recordar poner las props
+export function TaskComponent({ 
+  title, 
+  description, 
+  id, 
+  selecionada, 
+  done, 
+  changeSelect, 
+  toggleDone, 
 
-    const[done, setDone] = useState(true); //¿como usar useSte? primero voy a poner esto
-
-    //ahora vamos a crear la funcion que va a hacer que el estado cambie
-
-    const changeDone = () => setDone(!done);
+}: TaskProps) {
 
   return (
-     <div className={done? 'task' : 'doneTask'}>
-            <div>
-                <h2>{title}</h2>
-                <h4>{description}</h4>
-            </div>
-            
-            <Button onClick={changeDone}>{done? "Set as done" : "Done !"}</Button>
-           
+    <div className={${done ? "doneTask" : "task"} ${selecionada ? "selected" : ""}} 
+      onClick={() => changeSelect(id)}>
+
+      <div>
+        <h2>{title}</h2>
+        <h4>{description}</h4>
+      </div>
+
+      <Button onClick={(event) => {
+        event.stopPropagation(); 
+        toggleDone(id); 
+      }}>
+        {done ? "Done!" : "Set as done"}
+      </Button>
     </div>
-  )
+  );
 }
