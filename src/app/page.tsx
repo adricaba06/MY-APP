@@ -12,14 +12,12 @@ export default function Home() {
   const [taskList, setTaskList] = useState<Array<Task>>([
     {
       id: "1",
-      title: "Tarea",
-      description: "Hacer mates",
+      title: "Tarea de ejemplo",
+      description: "Esta es una tarea por defecto",
       selecionada: false,
-      done: false,  // Agregado "done" para controlar el estado de completado
-    },
+      done: false
+    }
   ]);
-
-   
 
   const addTask = (title: string, description: string, selecionada: boolean) => {
     const newTask: Task = {
@@ -37,6 +35,20 @@ export default function Home() {
     setTaskList(taskList.filter(task => !task.selecionada));
   };
 
+  let deleteCurrentTask = (id: string) =>{
+    let indice = -1;
+    for(let i = 0; i<taskList.length; i++){
+      if(taskList[i].id === id){
+        indice = i;
+      }
+      const updatedTaskList = [
+        ...taskList.slice(0, indice),  
+        ...taskList.slice(indice + 1)
+      ];
+      
+      setTaskList(updatedTaskList);
+    }
+  } 
 
   const toggleDone = (id: string) => {
     setTaskList(taskList.map(task =>
@@ -71,6 +83,7 @@ export default function Home() {
     setFilteredTasks(filterList(taskList, filter));
   }, [taskList, filter]);
 
+  /*Mostrar Lista------------------------------------------------*/
   const showList = () => filteredTasks.map(task => (
     <TaskComponent
       key={task.id}
@@ -81,8 +94,10 @@ export default function Home() {
         ))
       }
       toggleDone={toggleDone}  // Pasamos toggleDone al componente TaskComponent
+      remove={id => deleteCurrentTask(id)}
     />
   ));
+  /*Mostrar Lista------------------------------------------------*/
 
   const [visible, setVisible] = useState(false);
   const changeVisibility = () => setVisible(!visible);

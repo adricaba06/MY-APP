@@ -153,6 +153,9 @@ footer{
 .doneTask h2 {
   text-decoration: line-through;
 }
+.doneTask h4{
+  overflow: hidden;
+}
 
 
 .doneTask > .boton{
@@ -197,21 +200,21 @@ footer{
   margin: auto;
 
   position: fixed;
-  top: 10%;       /* Posiciónalo en el 50% desde la parte superior */
-  left: 40%;      /* Posiciónalo en el 50% desde la parte izquierda */
+  top: 10%;       
+  left: 40%;     
 
 }
 
 input {
   font-family: 'normal';
   margin-top: 30px;
-  font-size: 16px;         /* Cambiar el tamaño de la fuente */
-  padding: 10px;           /* Cambiar el relleno dentro del input */
-  border-radius: 5px;      /* Bordes redondeados */
-  border: 2px solid #DB7F67; /* Color y grosor del borde */
-  width: 100%;             /* Establecer un ancho del 100% */
-  background-color: white; /* Color de fondo */
-  color: #DB7F67;             /* Color del texto dentro del input */
+  font-size: 16px;         
+  padding: 10px;          
+  border-radius: 5px;      
+  border: 2px solid #DB7F67; 
+  width: 100%;             
+  background-color: white;
+  color: #DB7F67;             
 }
 
 .Form-button{
@@ -237,3 +240,52 @@ input {
 
 }
 
+/*selected .---------------------------*/
+
+
+@keyframes shakeRotate {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+  75% { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
+.selected{
+  display: inline-block;
+  animation: shakeRotate 0.4s ease-in-out infinite;
+  background-color: #A37B73;
+}
+
+.selected > .boton{
+  visibility: hidden;
+  transition: all 0s ease-out;
+}
+
+.filtros{
+  margin-top: 20px;
+}
+
+.filtros > .boton{
+  margin-bottom:  20px;
+}
+
+/*DELETE AND MOD BUTTON--------------------------*/
+
+.delMod{
+  background-color: transparent;
+  width: fit-content;
+  color: #FFEBC6;
+  border: none;
+  margin-top: 10px; 
+  transition: all 0.5s;
+}
+
+.delMod:hover{
+  background-color: transparent;
+  width: fit-content;
+  color: #ff000d;
+  border: none;
+  margin-top: 10px; 
+}
