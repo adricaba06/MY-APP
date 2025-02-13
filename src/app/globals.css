@@ -273,7 +273,25 @@ input {
 
 /*DELETE AND MOD BUTTON--------------------------*/
 
-.delMod{
+.selected .del{
+  display: none;
+}
+
+.selected .mod{
+  display: none;
+}
+
+.del{
+  background-color: transparent;
+  width: fit-content;
+  color: #FFEBC6;
+  border: none;
+  margin-top: 10px; 
+  transition: all 0.5s;
+  margin-right: 15px;
+}
+
+.mod{
   background-color: transparent;
   width: fit-content;
   color: #FFEBC6;
@@ -282,7 +300,15 @@ input {
   transition: all 0.5s;
 }
 
-.delMod:hover{
+.mod:hover{
+  background-color: transparent;
+  width: fit-content;
+  color: #006C67;
+  border: none;
+  margin-top: 10px; 
+}
+
+.del:hover{
   background-color: transparent;
   width: fit-content;
   color: #ff000d;
@@ -298,4 +324,8 @@ input {
 
 .acciones > .delMod{
   margin-left: 10px;
+}
+
+.footer{
+  background-color: #DB7F67;
 }

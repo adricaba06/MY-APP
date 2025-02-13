@@ -50,7 +50,7 @@ export function TaskComponent({
       
       <div className="acciones">
         <button
-          className="delMod"
+          className="del"
           onClick={(event) => {
             event.stopPropagation();
             remove(id);
@@ -69,7 +69,7 @@ export function TaskComponent({
         </button>
 
         <button
-          className="delMod"
+          className="mod"
           onClick={(event) => {
             event.stopPropagation();
             modify(id);

@@ -191,8 +191,8 @@ export default function Home() {
             </section>
           </div>
         </main>
-        <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-          <p>© 2025 Tu Nombre. Todos los derechos reservados.</p>
+        <footer className="footer">
+          <p>© 2025 Adrián Caballero Torrebejano. Todos los derechos reservados.</p>
         </footer>
       </div>
     </>
