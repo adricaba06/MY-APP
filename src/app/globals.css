@@ -15,90 +15,93 @@
 }
 
 @font-face {
-  font-family: 'normal';
+  font-family: "normal";
   src: url(../app/ContenidoEstilos/ModernAesthetic-DemoVersion-Regular.otf);
 }
 
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body {
- background-color: #006C67;
-
+  background-color: #006c67;
 }
 
-h1{
-
+h1 {
   font-size: 50px;
-  color: #FFEBC6;
-
+  color: #ffebc6;
 }
 
-h1, h2{
-  font-family: 'normal';
+h1,
+h2 {
+  font-family: "normal";
   font-weight: lighter;
 }
 
-.contenidoPrincipal{
+.contenidoPrincipal {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   height: 100vh;
 }
 
-.contenidoPrincipal aside{
+.contenidoPrincipal aside {
   padding: 40px;
   width: 20%;
-  background-color: #FFEBC6;
+  background-color: #ffebc6;
   height: 100%;
   border-top-right-radius: 50px;
 }
 
-.contenidoPrincipal section{
+.contenidoPrincipal section {
   padding: 40px;
-  background-image: linear-gradient(to bottom, #006C67 20%, #027973 50%, #029991 80%);
+  background-image: linear-gradient(
+    to bottom,
+    #006c67 20%,
+    #027973 50%,
+    #029991 80%
+  );
   height: 100%;
   width: 90%;
 }
 
-footer{
+footer {
   background-color: #171717;
 }
 
 /*Boton----------------------------------------------------*/
-.boton{
-  font-family: 'normal';
+.boton {
+  font-family: "normal";
   font-weight: lighter;
-  width:200px;
+  width: 200px;
   font-size: 20px;
-  background-color: #DB7F67;
-  color: #FFEBC6;
+  background-color: #db7f67;
+  color: #ffebc6;
   padding: 20px;
   text-align: center;
   transition: all 0.5s ease;
   border-radius: 10px;
-  border: 2px solid #DB7F67
+  border: 2px solid #db7f67;
 }
 
-.boton:hover{
-  background-color: #FFEBC6;
-  color: #DB7F67;
-  border: 2px solid #DB7F67;
+.boton:hover {
+  background-color: #ffebc6;
+  color: #db7f67;
+  border: 2px solid #db7f67;
 }
 
 /*task----------------------------------------------------*/
 
-.task{
+.task {
   display: flex;
   flex-direction: column;
-  
+
   margin-left: 20px;
-  margin-bottom:20px ;
-  background-color: #DB7F67;
-  color: #FFEBC6;
+  margin-bottom: 20px;
+  background-color: #db7f67;
+  color: #ffebc6;
   width: 30%;
   min-height: 50%;
   height: 50%;
@@ -107,41 +110,39 @@ footer{
   transition: all 0.5s ease;
 }
 
- .task h2, h4{
+.task h2,
+h4 {
   flex: 1;
   text-decoration: none;
 }
 
-.task h4{
+.task h4 {
   overflow: hidden;
 }
 
 .task > .boton {
   margin-top: 30px;
-  margin-right: 20px; 
+  margin-right: 20px;
   height: 60px;
   width: 95%;
   text-decoration: none;
-  border: 1px solid #FFEBC6;
+  border: 1px solid #ffebc6;
 }
 
-
-.task > .boton:hover{
-  border: 1px solid #FFEBC6;
-  color: #DB7F67;
-  background-color: #FFEBC6;
-
+.task > .boton:hover {
+  border: 1px solid #ffebc6;
+  color: #db7f67;
+  background-color: #ffebc6;
 }
 
-.doneTask{
-
+.doneTask {
   display: flex;
   flex-direction: column;
-  
+
   margin-left: 20px;
-  margin-bottom:20px ;
-  background-color: #A37B73;
-  color: #FFEBC6;
+  margin-bottom: 20px;
+  background-color: #a37b73;
+  color: #ffebc6;
   width: 30%;
   min-height: 50%;
   height: 50%;
@@ -153,46 +154,43 @@ footer{
 .doneTask h2 {
   text-decoration: line-through;
 }
-.doneTask h4{
+.doneTask h4 {
   overflow: hidden;
 }
 
-
-.doneTask > .boton{
-  border: 1px solid #FFEBC6;
-  color: #DB7F67;
-  background-color: #FFEBC6;
+.doneTask > .boton {
+  border: 1px solid #ffebc6;
+  color: #db7f67;
+  background-color: #ffebc6;
 
   height: 60px;
   width: 95%;
-
 }
 
 /*Recuadro-------------------------*/
 
-.recuadroTareas{
+.recuadroTareas {
   align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   background-color: transparent;
   border-radius: 10px;
-  border: 1px solid #FFEBC6;
+  border: 1px solid #ffebc6;
   padding: 30px;
-
 }
 
-.popup-visible{
+.popup-visible {
   display: block;
 }
 
-.popup-invisible{
+.popup-invisible {
   display: none;
 }
 
-.popup{
+.popup {
   background-image: linear-gradient(to bottom, #027973 50%, #029991 80%);
-  border: 1px solid #FFEBC6;
+  border: 1px solid #ffebc6;
   border-radius: 6px;
   width: 30%;
   height: 40%;
@@ -200,142 +198,147 @@ footer{
   margin: auto;
 
   position: fixed;
-  top: 10%;       
-  left: 40%;     
-
+  top: 10%;
+  left: 40%;
 }
 
 input {
-  font-family: 'normal';
+  font-family: "normal";
   margin-top: 30px;
-  font-size: 16px;         
-  padding: 10px;          
-  border-radius: 5px;      
-  border: 2px solid #DB7F67; 
-  width: 100%;             
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #db7f67;
+  width: 100%;
   background-color: white;
-  color: #DB7F67;             
+  color: #db7f67;
 }
 
-.Form-button{
-  font-family: 'normal';
+.Form-button {
+  font-family: "normal";
   margin-top: 20px;
   font-weight: lighter;
-  width:200px;
+  width: 200px;
   font-size: 20px;
-  background-color: #DB7F67;
-  color: #FFEBC6;
+  background-color: #db7f67;
+  color: #ffebc6;
   padding: 20px;
   text-align: center;
   transition: all 0.5s ease;
   border-radius: 10px;
-  border: 2px solid #DB7F67
-
+  border: 2px solid #db7f67;
 }
 
-.Form-button:hover{
+.Form-button:hover {
   background-color: transparent;
-  color: #DB7F67;
-  border: 2px solid #DB7F67;
-
+  color: #db7f67;
+  border: 2px solid #db7f67;
 }
 
 /*selected .---------------------------*/
 
-
 @keyframes shakeRotate {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(-1deg); }
-  50% { transform: rotate(1deg); }
-  75% { transform: rotate(-1deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+  75% {
+    transform: rotate(-1deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
-.principales > .boton{
+.principales > .boton {
   margin-bottom: 10px;
 }
-.selected{
+.selected {
   display: inline-block;
   animation: shakeRotate 0.4s ease-in-out infinite;
-  background-color: #A37B73;
+  background-color: #a37b73;
 }
 
-.selected > .boton{
+.selected > .boton {
   visibility: hidden;
   transition: all 0s ease-out;
 }
 
-.filtros{
+.filtros {
   margin-top: 20px;
 }
 
-.filtros > .boton{
-  background-color: #A37B73;
-  border: 2px solid #A37B73;
-  margin-bottom:  20px;
+.filtros > .boton {
+  background-color: #a37b73;
+  border: 2px solid #a37b73;
+  margin-bottom: 20px;
 }
 
-.filtros > .boton:hover{
-  background-color: #FFEBC6;
-  color: #A37B73;
-  border: 2px solid #A37B73;
+.filtros > .boton:hover {
+  background-color: #ffebc6;
+  color: #a37b73;
+  border: 2px solid #a37b73;
 }
 
 /*DELETE AND MOD BUTTON--------------------------*/
 
-.selected .del{
+.selected .del {
   display: none;
 }
 
-.selected .mod{
+.selected .mod {
   display: none;
 }
 
-.del{
+.del {
   background-color: transparent;
   width: fit-content;
-  color: #FFEBC6;
+  color: #ffebc6;
   border: none;
-  margin-top: 10px; 
+  margin-top: 10px;
   transition: all 0.5s;
   margin-right: 15px;
 }
 
-.mod{
+.mod {
   background-color: transparent;
   width: fit-content;
-  color: #FFEBC6;
+  color: #ffebc6;
   border: none;
-  margin-top: 10px; 
+  margin-top: 10px;
   transition: all 0.5s;
 }
 
-.mod:hover{
+.mod:hover {
   background-color: transparent;
   width: fit-content;
-  color: #006C67;
+  color: #006c67;
   border: none;
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
-.del:hover{
+.del:hover {
   background-color: transparent;
   width: fit-content;
   color: #ff000d;
   border: none;
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
-.acciones{
+.acciones {
   display: flex;
   flex-direction: row;
-
 }
 
-.acciones > .delMod{
+.acciones > .delMod {
   margin-left: 10px;
 }
 
-.footer{
-  background-color: #DB7F67;
+.footer {
+  background-color: #db7f67;
 }

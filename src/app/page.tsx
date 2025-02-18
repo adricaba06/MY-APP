@@ -9,31 +9,22 @@ import { Task } from "./components/task";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Home() {
-  const [taskList, setTaskList] = useState<Array<Task>>([
-    {
-      id: "1",
-      title: "Tarea de ejemplo",
-      description: "Esta es una tarea por defecto",
-      selecionada: false,
-      done: false,
-    },
-  ]);
+   const [taskList, setTaskList] = useState<Task[]>([]);
 
-  const addTask = (
-    title: string,
-    description: string,
-    selecionada: boolean
-  ) => {
-    const newTask: Task = {
-      id: uuidv4(),
-      title,
-      description,
-      selecionada,
-      done: false,
+  // useEffect para cargar las tareas desde la API
+  useEffect(() => {
+    const fetchTaskList = async () => {
+      try {
+        const response = await fetch("/api/todos");
+        const data = await response.json();
+        setTaskList(data);
+      } catch (error) {
+        console.error("Error al obtener las tareas", error);
+      }
     };
 
-    setTaskList([...taskList, newTask]);
-  };
+    fetchTaskList();
+  }, []);
 
   const deleteTask = () => {
     setTaskList(taskList.filter((task) => !task.selecionada));
@@ -132,7 +123,7 @@ export default function Home() {
       />
     ));
 
-  const [vispop2, setvispop2] = useState(false);
+  const [vispop2, setvispop2] = useState(false); //vista del segundo popUp
   const changevispop2 = () => setvispop2(!vispop2);
 
   const [visible, setVisible] = useState(false);
@@ -148,6 +139,18 @@ export default function Home() {
     title: "",
     description: "",
   });
+
+  const addTask = (title: string, description: string, selecionada: boolean) => {
+    const newTask: Task = {
+      id: uuidv4(),
+      title,
+      description,
+      selecionada,
+      done: false,  
+    };
+
+    setTaskList([...taskList, newTask]);
+  };
 
   const handleSubmit = (title: string, description: string) => {
     addTask(title, description, false);
