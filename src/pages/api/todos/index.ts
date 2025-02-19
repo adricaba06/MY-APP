@@ -1,5 +1,6 @@
+import { pool } from '@/db/pool';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import pool from '@/db/pool';  // Asegúrate de importar el archivo correctamente
+
 
 interface Task {
   id: number;

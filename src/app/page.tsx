@@ -7,9 +7,10 @@ import PopUp from "./components/popUp";
 import { useState, useEffect } from "react";
 import { Task } from "./components/task";
 import { v4 as uuidv4 } from "uuid";
+import handler from "@/pages/api/todos/addTask";
 
 export default function Home() {
-   const [taskList, setTaskList] = useState<Task[]>([]);
+  const [taskList, setTaskList] = useState<Task[]>([]);
 
   // useEffect para cargar las tareas desde la API
   useEffect(() => {
@@ -96,9 +97,9 @@ export default function Home() {
         throw new Error("Invalid filter");
     }
   }
-
+  
   const [filteredTasks, setFilteredTasks] = useState<Task[]>(taskList);
-
+  console.log(filteredTasks, taskList);
   useEffect(() => {
     setFilteredTasks(filterList(taskList, filter));
   }, [taskList, filter]);
@@ -140,16 +141,30 @@ export default function Home() {
     description: "",
   });
 
-  const addTask = (title: string, description: string, selecionada: boolean) => {
+  const addTask = async (
+    title: string,
+    description: string,
+    selecionada: boolean
+  ) => {
     const newTask: Task = {
       id: uuidv4(),
       title,
       description,
       selecionada,
-      done: false,  
+      done: false,
     };
 
-    setTaskList([...taskList, newTask]);
+    try {
+      const response = await fetch("/api/todos/addTask", { //error backend
+        method: "POST", //se usa para Crear nuevos recursos en el servidor (por ejemplo, agregar una tarea, registrar un usuario, enviar un formulario).
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTask),
+      });
+    } catch (error) {
+      console.error("Error al añadir la tarea", error);
+    }
   };
 
   const handleSubmit = (title: string, description: string) => {
@@ -168,7 +183,7 @@ export default function Home() {
         <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
           <div className="contenidoPrincipal">
             <aside>
-              <div>
+              <div>{/*Crud*/}
                 <div className="principales">
                   <Button onClick={() => changeVisibility()}>
                     New Task{" "}

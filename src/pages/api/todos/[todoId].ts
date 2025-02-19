@@ -1,5 +1,5 @@
+import { pool } from '@/db/pool';
 import { NextApiRequest, NextApiResponse } from 'next';
-import pool from '@/db/pool'; // Asegúrate de que el archivo pool.ts esté importado correctamente
 
 interface Task {
   id: string;
