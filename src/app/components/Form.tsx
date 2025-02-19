@@ -23,13 +23,9 @@ export default function Form({submit}: formProps) {
 
     }
 
-    const handleForm = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault(); 
-      };
-
   return (
 
-    <form onSubmit={handleForm}>
+    <form>
         <input
         type="text"
         name="title"
@@ -52,7 +48,6 @@ export default function Form({submit}: formProps) {
 
         <button className="Form-button"  onClick={() => {
             submit(values.title, values.description);  
-            
         }}>
             submit
         </button>

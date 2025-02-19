@@ -7,7 +7,7 @@ import PopUp from "./components/popUp";
 import { useState, useEffect } from "react";
 import { Task } from "./components/task";
 import { v4 as uuidv4 } from "uuid";
-import handler from "@/pages/api/todos/addTask";
+
 
 export default function Home() {
   const [taskList, setTaskList] = useState<Task[]>([]);
@@ -27,8 +27,31 @@ export default function Home() {
     fetchTaskList();
   }, []);
 
-  const deleteTask = () => {
-    setTaskList(taskList.filter((task) => !task.selecionada));
+  const deleteTask = async () => {
+    if (taskList.some((task) => task.selecionada === true)) {
+      taskList.forEach(async (task) => { // ya que no puedo usar map
+        if (task.selecionada === true) {
+          try {
+            const response = await fetch("/api/todos/deleteTask", {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ id: task.id }),
+            });
+
+            if (!response.ok) {
+              console.error("Error eliminando la tarea con id:", task.id);
+            } else {
+              console.log("Tarea eliminada con éxito:", task.id); 
+              window.location.reload(); // lo he buscado en google
+            }
+          } catch (error) {
+            console.error("Error en la solicitud DELETE:", error);
+          }
+        }
+      });
+    }
   };
 
   let modifyCurrentTask = (
@@ -97,7 +120,7 @@ export default function Home() {
         throw new Error("Invalid filter");
     }
   }
-  
+
   const [filteredTasks, setFilteredTasks] = useState<Task[]>(taskList);
   console.log(filteredTasks, taskList);
   useEffect(() => {
@@ -155,7 +178,7 @@ export default function Home() {
     };
 
     try {
-      const response = await fetch("/api/todos/addTask", { //error backend
+      const response = await fetch("/api/todos/addTask", {
         method: "POST", //se usa para Crear nuevos recursos en el servidor (por ejemplo, agregar una tarea, registrar un usuario, enviar un formulario).
         headers: {
           "Content-Type": "application/json",
@@ -183,7 +206,8 @@ export default function Home() {
         <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
           <div className="contenidoPrincipal">
             <aside>
-              <div>{/*Crud*/}
+              <div>
+                {/*Crud*/}
                 <div className="principales">
                   <Button onClick={() => changeVisibility()}>
                     New Task{" "}
