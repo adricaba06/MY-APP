@@ -77,18 +77,25 @@ export default function Home() {
     setCurrentTask({ id, title: newTitle, description: newDescription }); // Asigna los valores a los inputs
   };
 
-  let deleteCurrentTask = (id: string) => {
-    let indice = -1;
-    for (let i = 0; i < taskList.length; i++) {
-      if (taskList[i].id === id) {
-        indice = i;
+  let deleteCurrentTask = async (id: string) => {
+    try {
+      const response = await fetch("/api/todos/deleteTask", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }), 
+      });
+  
+      if (!response.ok) {
+        console.error("Error eliminando la tarea con id:", id);
+      } else {
+        console.log("Tarea eliminada con éxito:", id);
+        setTaskList(taskList.filter((task) => task.id !== id));
+        window.location.reload(); 
       }
-      const updatedTaskList = [
-        ...taskList.slice(0, indice),
-        ...taskList.slice(indice + 1),
-      ];
-
-      setTaskList(updatedTaskList);
+    } catch (error) {
+      console.error("Error en la solicitud DELETE:", error);
     }
   };
 
