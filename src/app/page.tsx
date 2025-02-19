@@ -54,19 +54,41 @@ export default function Home() {
     }
   };
 
-  let modifyCurrentTask = (
+  let modifyCurrentTask = async (
     id: string,
     newTitle: string,
     newDescription: string
   ) => {
-    setTaskList(
-      taskList.map((task) =>
-        task.id === id
-          ? { ...task, title: newTitle, description: newDescription }
-          : task
-      )
-    );
+    try {
+      const response = await fetch("/api/todos/modifyTask", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,              
+          title: newTitle, 
+          description: newDescription, 
+        }),
+      });
+  
+      if (!response.ok) { //si la respuesta no es correcta
+        console.error("Error modificando la tarea con id:", id);
+      } else {
+        console.log("Tarea modificada con éxito:", id);
+  
+        // Actualiza el estado de la lista de tareas directamente en el frontend
+        setTaskList((prevTasks) => {
+          return prevTasks.map((task) =>
+            task.id === id ? { ...task, title: newTitle, description: newDescription } : task
+          );
+        });
+      }
+    } catch (error) {
+      console.error("Error en la solicitud MODIFY:", error);
+    }
   };
+  
 
   const handlemodification = (
     id: string,
