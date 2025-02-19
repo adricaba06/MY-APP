@@ -28,7 +28,7 @@ export default function Home() {
   }, []);
 
   const deleteTask = async () => {
-    if (taskList.some((task) => task.selecionada === true)) {
+    if (taskList.some((task) => task.selecionada === true)) { //some revisa si al menos una de la stareas esta seleccionada
       taskList.forEach(async (task) => { // ya que no puedo usar map
         if (task.selecionada === true) {
           try {
@@ -89,7 +89,6 @@ export default function Home() {
     }
   };
   
-
   const handlemodification = (
     id: string,
     newTitle: string,
@@ -217,6 +216,7 @@ export default function Home() {
     } catch (error) {
       console.error("Error al añadir la tarea", error);
     }
+    
   };
 
   const handleSubmit = (title: string, description: string) => {

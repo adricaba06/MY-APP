@@ -103,8 +103,7 @@ footer {
   background-color: #db7f67;
   color: #ffebc6;
   width: 30%;
-  min-height: 50%;
-  height: 50%;
+  height: 40%;
   padding: 20px;
   border-radius: 10px;
   transition: all 0.5s ease;
@@ -170,6 +169,11 @@ h4 {
 /*Recuadro-------------------------*/
 
 .recuadroTareas {
+  height: 80%;
+  overflow-y: scroll;
+
+  display: flex;
+  flex-direction: column;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -178,6 +182,10 @@ h4 {
   border-radius: 10px;
   border: 1px solid #ffebc6;
   padding: 30px;
+}
+
+.recuadroTareas::-webkit-scrollbar { /*lo encontre en internet*/
+  width: 0px;
 }
 
 .popup-visible {
