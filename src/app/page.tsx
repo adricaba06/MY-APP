@@ -120,13 +120,45 @@ export default function Home() {
     }
   };
 
-  const toggleDone = (id: string) => {
-    setTaskList(
+  const toggleDone = async (id: string) => {
+    setTaskList( // no voy a borrar esto porq en verdad hace que se vea inmediatamente en el fronted
       taskList.map((task) =>
         task.id === id ? { ...task, done: !task.done } : task
       )
     );
+  
+    try{
+      const response = await fetch("/api/todos/done", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          done: taskList.find(task => task.id === id)?.done, // Busca la tarea por su 'id' y obtiene el valor actual de 'done'
+        }),
+      });
+  
+      if (!response.ok) {
+        console.error("Error al cambiar el estado de la tarea");
+        // Volver al estado anterior
+        setTaskList(
+          taskList.map((task) =>
+            task.id === id ? { ...task, done: !task.done } : task
+          )
+        );
+      }
+    } catch (error) {
+      console.error("Error al cambiar el estado de la tarea", error);
+      // En caso de error, revertir el cambio
+      setTaskList(
+        taskList.map((task) =>
+          task.id === id ? { ...task, done: !task.done } : task
+        )
+      );
+    }
   };
+  
 
   enum Filter {
     All,
