@@ -341,7 +341,7 @@ input {
 .del:hover {
   background-color: transparent;
   width: fit-content;
-  color: #ff000d;
+  color: #94374b;
   border: none;
   margin-top: 10px;
 }
@@ -382,6 +382,23 @@ input {
   border: 1px solid white;
   transition: all 0.5s ease;
 }
+
+/* Cambiar el color de fondo de los botones de navegación */
+.fc-button {
+  background-color: #db7f67 !important;
+  color: white !important; 
+  border: none !important;
+}
+
+.fc-button:hover {
+  background-color: #c70039 !important; 
+}
+
+/* Cambiar color cuando el botón está activo */
+.fc-button-active {
+  background-color: #900c3f !important;
+}
+/*aparentemente !important le da prioridad*/
 
 .footer {
   background-color: #db7f67;

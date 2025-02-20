@@ -397,7 +397,9 @@ export default function Home() {
               initialView="dayGridMonth"
               events={filteredTasks.map((task) => ({
                 title: task.title,
-                start: new Date(task.date), 
+                start: new Date(task.date),
+                color: task.done ? "#618f5b" : "#94374b",
+                allDay: true,
               }))}
             />
           </div>
