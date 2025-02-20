@@ -13,6 +13,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import { title } from "process";
 
 export default function Home() {
+  
   const [taskList, setTaskList] = useState<Task[]>([]);
 
   // useEffect para cargar las tareas desde la API
