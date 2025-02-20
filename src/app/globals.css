@@ -20,7 +20,7 @@
 }
 
 /**********GENERAL**********/
-.normal{
+.normal {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
 }
@@ -191,7 +191,8 @@ h4 {
   padding: 30px;
 }
 
-.recuadroTareas::-webkit-scrollbar { /*lo encontre en internet*/
+.recuadroTareas::-webkit-scrollbar {
+  /*lo encontre en internet*/
   width: 0px;
 }
 
@@ -354,7 +355,6 @@ input {
   margin-left: 10px;
 }
 
-
 .calendario {
   margin-left: 30%;
   width: 50%;
@@ -367,7 +367,6 @@ input {
   border-radius: 10px;
   border: 1px solid white;
   transition: all 0.5s ease;
-  
 }
 
 .calendario:hover {
@@ -382,7 +381,6 @@ input {
   border-radius: 10px;
   border: 1px solid white;
   transition: all 0.5s ease;
-  
 }
 
 .footer {

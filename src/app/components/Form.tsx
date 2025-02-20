@@ -26,42 +26,47 @@ export default function Form({submit}: formProps) {
 
   return (
 
-    <form>
+    <form onSubmit={() => {
+        submit(values.title, values.description, values.date);
+    }}>
         <input
-        type="text"
-        name="title"
-        maxLength={16}
-        value={values.title}
-        onChange={handleInpunt}
-        required placeholder="Task Name"
-        id="input1"
+            type="text"
+            name="title"
+            maxLength={16}
+            value={values.title}
+            onChange={handleInpunt}
+            required
+            placeholder="Task Name"
+            id="input1"
         />
-
+    
         <input
-        type="text"
-        name="description"
-        maxLength={94}
-        value={values.description}
-        onChange={handleInpunt}
-        placeholder="Add a Description"
-        id="input2"
+            type="text"
+            name="description"
+            maxLength={94}
+            value={values.description}
+            onChange={handleInpunt}
+            placeholder="Add a Description"
+            id="input2"
         />
-
-        <input className="normal"
-        type="text"
-        name="date"
-        maxLength={94}
-        value={values.date}
-        onChange={handleInpunt}
-        placeholder="Add a Date    ( yyyy-mm-dd )" 
-        id="input3"
+    
+        <input
+            className="normal"
+            type="text"
+            name="date"
+            maxLength={94}
+            value={values.date}
+            onChange={handleInpunt}
+            required
+            placeholder="Add a Date ( yyyy-mm-dd )"
+            id="input3"
         />
-
-        <button className="Form-button"  onClick={() => {
-            submit(values.title, values.description, values.date);  
-        }}>
-            submit
+    
+        <button className="Form-button" type="submit">
+            Submit
         </button>
     </form>
+    
+
   )
 }
