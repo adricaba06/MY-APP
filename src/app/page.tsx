@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import { Task } from "./components/task";
 import { v4 as uuidv4 } from "uuid";
 
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
 
 export default function Home() {
   const [taskList, setTaskList] = useState<Task[]>([]);
@@ -28,8 +30,10 @@ export default function Home() {
   }, []);
 
   const deleteTask = async () => {
-    if (taskList.some((task) => task.selecionada === true)) { //some revisa si al menos una de la stareas esta seleccionada
-      taskList.forEach(async (task) => { // ya que no puedo usar map
+    if (taskList.some((task) => task.selecionada === true)) {
+      //some revisa si al menos una de la stareas esta seleccionada
+      taskList.forEach(async (task) => {
+        // ya que no puedo usar map
         if (task.selecionada === true) {
           try {
             const response = await fetch("/api/todos/deleteTask", {
@@ -43,7 +47,7 @@ export default function Home() {
             if (!response.ok) {
               console.error("Error eliminando la tarea con id:", task.id);
             } else {
-              console.log("Tarea eliminada con éxito:", task.id); 
+              console.log("Tarea eliminada con éxito:", task.id);
               window.location.reload(); // lo he buscado en google
             }
           } catch (error) {
@@ -66,21 +70,24 @@ export default function Home() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id,              
-          title: newTitle, 
-          description: newDescription, 
+          id,
+          title: newTitle,
+          description: newDescription,
         }),
       });
-  
-      if (!response.ok) { //si la respuesta no es correcta
+
+      if (!response.ok) {
+        //si la respuesta no es correcta
         console.error("Error modificando la tarea con id:", id);
       } else {
         console.log("Tarea modificada con éxito:", id);
-  
+
         // Actualiza el estado de la lista de tareas directamente en el frontend
         setTaskList((prevTasks) => {
           return prevTasks.map((task) =>
-            task.id === id ? { ...task, title: newTitle, description: newDescription } : task
+            task.id === id
+              ? { ...task, title: newTitle, description: newDescription }
+              : task
           );
         });
       }
@@ -88,7 +95,7 @@ export default function Home() {
       console.error("Error en la solicitud MODIFY:", error);
     }
   };
-  
+
   const handlemodification = (
     id: string,
     newTitle: string,
@@ -105,15 +112,15 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id }), 
+        body: JSON.stringify({ id }),
       });
-  
+
       if (!response.ok) {
         console.error("Error eliminando la tarea con id:", id);
       } else {
         console.log("Tarea eliminada con éxito:", id);
         setTaskList(taskList.filter((task) => task.id !== id));
-        window.location.reload(); 
+        window.location.reload();
       }
     } catch (error) {
       console.error("Error en la solicitud DELETE:", error);
@@ -121,13 +128,14 @@ export default function Home() {
   };
 
   const toggleDone = async (id: string) => {
-    setTaskList( // no voy a borrar esto porq en verdad hace que se vea inmediatamente en el fronted
+    setTaskList(
+      // no voy a borrar esto porq en verdad hace que se vea inmediatamente en el fronted
       taskList.map((task) =>
         task.id === id ? { ...task, done: !task.done } : task
       )
     );
-  
-    try{
+
+    try {
       const response = await fetch("/api/todos/done", {
         method: "PUT",
         headers: {
@@ -135,10 +143,10 @@ export default function Home() {
         },
         body: JSON.stringify({
           id,
-          done: taskList.find(task => task.id === id)?.done, // Busca la tarea por su 'id' y obtiene el valor actual de 'done'
+          done: taskList.find((task) => task.id === id)?.done, // Busca la tarea por su 'id' y obtiene el valor actual de 'done'
         }),
       });
-  
+
       if (!response.ok) {
         console.error("Error al cambiar el estado de la tarea");
         // Volver al estado anterior
@@ -158,7 +166,6 @@ export default function Home() {
       );
     }
   };
-  
 
   enum Filter {
     All,
@@ -248,7 +255,6 @@ export default function Home() {
     } catch (error) {
       console.error("Error al añadir la tarea", error);
     }
-    
   };
 
   const handleSubmit = (title: string, description: string) => {
@@ -361,6 +367,17 @@ export default function Home() {
               <h1>Task Manager</h1>
               <div className="recuadroTareas">{showList()}</div>
             </section>
+          </div>
+          <div className="calendario">
+            <FullCalendar
+              plugins={[dayGridPlugin]}
+              initialView="dayGridMonth"
+              events={[
+                { title: "Meeting", start: new Date() },
+                { title: "Evento 2", start: "2025-02-21" },
+                { title: "Holahola", start: "2025-03-10" },
+              ]}
+            />
           </div>
         </main>
         <footer className="footer">
