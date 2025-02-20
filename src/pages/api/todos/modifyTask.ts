@@ -7,12 +7,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { id, title, description } = req.body;
+    const { id, title, description, date } = req.body;
 
     // Verifica que los datos están llegando correctamente
-    console.log("Datos recibidos:", { id, title, description });
+    console.log("Datos recibidos:", { id, title, description, date });
 
-    if (!id || id.trim() === "" || !title || !description) {
+    if (!id || id.trim() === "" || !title || !description || !date) {
       return res.status(400).json({ message: "Title and description cannot be empty" });
     }
 
@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Consulta para actualizar la tarea
     const query = `UPDATE todos SET title = $1, description = $2 WHERE id = $3`;
-    await pool.query(query, [title, description, id]);
+    await pool.query(query, [title, description, id,]);
 
     res.status(200).json({ message: "Task updated successfully" });
   } catch (error) {

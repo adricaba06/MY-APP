@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import { title } from "process";
 
 export default function Home() {
   const [taskList, setTaskList] = useState<Task[]>([]);
@@ -61,7 +62,8 @@ export default function Home() {
   let modifyCurrentTask = async (
     id: string,
     newTitle: string,
-    newDescription: string
+    newDescription: string,
+    newDate: string,
   ) => {
     try {
       const response = await fetch("/api/todos/modifyTask", {
@@ -73,6 +75,7 @@ export default function Home() {
           id,
           title: newTitle,
           description: newDescription,
+          date: newDate,
         }),
       });
 
@@ -86,7 +89,7 @@ export default function Home() {
         setTaskList((prevTasks) => {
           return prevTasks.map((task) =>
             task.id === id
-              ? { ...task, title: newTitle, description: newDescription }
+              ? { ...task, title: newTitle, description: newDescription, date: newDate } // Modifica la tarea con el 'id' correspondiente
               : task
           );
         });
@@ -99,10 +102,11 @@ export default function Home() {
   const handlemodification = (
     id: string,
     newTitle: string,
-    newDescription: string
+    newDescription: string,
+    newDate: string
   ) => {
     changevispop2(); // Abre el PopUp de edición
-    setCurrentTask({ id, title: newTitle, description: newDescription }); // Asigna los valores a los inputs
+    setCurrentTask({ id, title: newTitle, description: newDescription, date: newDate }); // Asigna los valores a los inputs
   };
 
   let deleteCurrentTask = async (id: string) => {
@@ -210,7 +214,7 @@ export default function Home() {
         }
         toggleDone={toggleDone}
         remove={(id) => deleteCurrentTask(id)}
-        modify={(id) => handlemodification(id, task.title, task.description)} // Aqui paso la tarea para modificar
+        modify={(id) => handlemodification(id, task.title, task.description, task.date)} // Aqui paso la tarea para modificar
       />
     ));
 
@@ -225,16 +229,19 @@ export default function Home() {
     id: string;
     title: string;
     description: string;
+    date: string;
   }>({
     id: "",
     title: "",
     description: "",
+    date: "",
   });
 
   const addTask = async (
     title: string,
     description: string,
-    selecionada: boolean
+    selecionada: boolean,
+    date: string
   ) => {
     const newTask: Task = {
       id: uuidv4(),
@@ -242,6 +249,7 @@ export default function Home() {
       description,
       selecionada,
       done: false,
+      date,
     };
 
     try {
@@ -257,13 +265,13 @@ export default function Home() {
     }
   };
 
-  const handleSubmit = (title: string, description: string) => {
-    addTask(title, description, false);
+  const handleSubmit = (title: string, description: string, date: string) => {
+    addTask(title, description, false, date);
     changeVisibility();
   };
 
-  const handleEditSubmit = (title: string, description: string) => {
-    modifyCurrentTask(currentTask.id, title, description);
+  const handleEditSubmit = (title: string, description: string, date: string) => {
+    modifyCurrentTask(currentTask.id, title, description, date);
     changevispop2();
   };
 
@@ -319,7 +327,8 @@ export default function Home() {
                       e.preventDefault();
                       handleEditSubmit(
                         currentTask.title,
-                        currentTask.description
+                        currentTask.description,
+                        currentTask.date
                       );
                     }}
                   >
@@ -343,6 +352,17 @@ export default function Home() {
                         setCurrentTask({
                           ...currentTask,
                           description: e.target.value,
+                        })
+                      }
+                    />
+                    <input
+                      type="text"
+                      maxLength={10}
+                      value={currentTask.date}
+                      onChange={(e) =>
+                        setCurrentTask({
+                          ...currentTask,
+                          date: e.target.value,
                         })
                       }
                     />
@@ -372,11 +392,10 @@ export default function Home() {
             <FullCalendar
               plugins={[dayGridPlugin]}
               initialView="dayGridMonth"
-              events={[
-                { title: "Meeting", start: new Date() },
-                { title: "Evento 2", start: "2025-02-21" },
-                { title: "Holahola", start: "2025-03-10" },
-              ]}
+              events={filteredTasks.map((task) => ({
+                title: task.title,
+                start: new Date(task.date), 
+              }))}
             />
           </div>
         </main>

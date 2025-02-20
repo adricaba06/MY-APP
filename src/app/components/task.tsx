@@ -8,6 +8,7 @@ export interface Task {
   id: string;
   selecionada: boolean;
   done: boolean;
+  date: string;
 }
 
 export interface TaskProps extends Task {
@@ -23,6 +24,7 @@ export function TaskComponent({
   id,
   selecionada,
   done,
+  date,
   changeSelect,
   toggleDone,
   remove,

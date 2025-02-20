@@ -12,18 +12,19 @@ export default async function handler(
   }
 
   try {
-    const { title, description, selecionada, done, id } = req.body; //extraemos los datos del body
+    const { title, description, selecionada, done, id, date } = req.body; //extraemos los datos del body
     if (
       !title ||
       !description ||
       selecionada === undefined ||
       done === undefined ||
-      !id
+      !id ||
+      !date
     ) {
       return res.status(400).json({ message: "Missing required fields" });
     }
-    const query = `INSERT INTO todos (title, description, selecionada, done, id) VALUES ($1, $2, $3, $4, $5)`;
-    await pool.query(query, [title, description, selecionada, done, id]); //ejecutamos la query en la base de datos
+    const query = `INSERT INTO todos (title, description, selecionada, done, id, date) VALUES ($1, $2, $3, $4, $5, $6);`;
+    await pool.query(query, [title, description, selecionada, done, id, date]); //ejecutamos la query en la base de datos
     res.status(201).json({ message: "Task added successfully" });
   } catch (error) {
     console.error("Error adding task:", error);

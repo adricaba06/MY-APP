@@ -3,7 +3,7 @@ import React from 'react'
 
 
 interface formProps{
-    submit: (title: string, description: string) => void;
+    submit: (title: string, description: string, date: string) => void;
 }
 
 
@@ -11,7 +11,8 @@ export default function Form({submit}: formProps) {
 
     const [values, setValues] = useState({ 
         title: "", 
-        description: ""
+        description: "",
+        date: "",
     });
 
     const handleInpunt = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -46,8 +47,18 @@ export default function Form({submit}: formProps) {
         id="input2"
         />
 
+        <input
+        type="text"
+        name="date"
+        maxLength={94}
+        value={values.date}
+        onChange={handleInpunt}
+        placeholder="Add a Date    ( yyyy-mm-dd )" 
+        id="input3"
+        />
+
         <button className="Form-button"  onClick={() => {
-            submit(values.title, values.description);  
+            submit(values.title, values.description, values.date);  
         }}>
             submit
         </button>

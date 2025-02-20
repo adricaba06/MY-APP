@@ -7,6 +7,7 @@ interface Task {
   description: string;
   selecionada: boolean;
   done: boolean;
+  date: string;
 }
 
 const getTodo = async (req: NextApiRequest, res: NextApiResponse) => {
