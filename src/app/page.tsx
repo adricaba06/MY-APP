@@ -221,6 +221,9 @@ export default function Home() {
   const [vispop2, setvispop2] = useState(false); //vista del segundo popUp
   const changevispop2 = () => setvispop2(!vispop2);
 
+  const [vispop3, setvispop3] = useState(false); //vista del calendario
+  const changevispop3 = () => setvispop3(!vispop3);
+
   const [visible, setVisible] = useState(false);
   const changeVisibility = () => setVisible(!visible);
 
@@ -355,7 +358,7 @@ export default function Home() {
                         })
                       }
                     />
-                    <input
+                    <input className="normal"
                       type="text"
                       maxLength={10}
                       value={currentTask.date}
@@ -380,9 +383,9 @@ export default function Home() {
                     To Do
                   </Button>
                 </div>
+                
               </div>
             </aside>
-
             <section>
               <h1>Task Manager</h1>
               <div className="recuadroTareas">{showList()}</div>

@@ -19,6 +19,14 @@
   src: url(../app/ContenidoEstilos/ModernAesthetic-DemoVersion-Regular.otf);
 }
 
+/**********GENERAL**********/
+.normal{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
+
+/****************************/
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -200,7 +208,7 @@ h4 {
   border: 1px solid #ffebc6;
   border-radius: 6px;
   width: 30%;
-  height: 40%;
+  height: 50%;
   padding: 30px;
   margin: auto;
 
@@ -346,10 +354,35 @@ input {
   margin-left: 10px;
 }
 
-.calendario{
-  width: 60%;
-  height: 50%;
-  margin-left: 20%;
+
+.calendario {
+  margin-left: 30%;
+  width: 50%;
+
+  position: fixed;
+  top: 10%;
+  left: 69%;
+  background-color: #a37b73;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid white;
+  transition: all 0.5s ease;
+  
+}
+
+.calendario:hover {
+  margin-left: 30%;
+  width: 50%;
+
+  position: fixed;
+  top: 10%;
+  left: 20%;
+  background-color: #a37b73;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid white;
+  transition: all 0.5s ease;
+  
 }
 
 .footer {

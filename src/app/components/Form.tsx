@@ -47,7 +47,7 @@ export default function Form({submit}: formProps) {
         id="input2"
         />
 
-        <input
+        <input className="normal"
         type="text"
         name="date"
         maxLength={94}
