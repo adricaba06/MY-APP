@@ -25,6 +25,11 @@
   font-weight: lighter;
 }
 
+.masChico {
+  font-size: 20px;
+  width: 30px;
+}
+
 /****************************/
 
 * {
@@ -386,12 +391,12 @@ input {
 /* Cambiar el color de fondo de los botones de navegación */
 .fc-button {
   background-color: #db7f67 !important;
-  color: white !important; 
+  color: white !important;
   border: none !important;
 }
 
 .fc-button:hover {
-  background-color: #c70039 !important; 
+  background-color: #c70039 !important;
 }
 
 /* Cambiar color cuando el botón está activo */

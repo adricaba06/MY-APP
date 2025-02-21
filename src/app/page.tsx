@@ -11,7 +11,6 @@ import { v4 as uuidv4 } from "uuid";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
-
 export default function Home() {
   const [taskList, setTaskList] = useState<Task[]>([]);
 
@@ -199,10 +198,10 @@ export default function Home() {
         return tasks.filter((task) => task.done === true);
       case Filter.NotDone:
         return tasks.filter((task) => task.done === false);
-        case Filter.name:
-          return tasks.filter((task) =>
-            task.title.toLowerCase().includes(search.toLowerCase())
-          );
+      case Filter.name:
+        return tasks.filter((task) =>
+          task.title.toLowerCase().includes(search.toLowerCase())
+        );
       default:
         throw new Error("Invalid filter");
     }
@@ -405,8 +404,17 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <input type="text" placeholder="Search task"  onChange={(e) => setSearch(e.target.value)}/>
-                  <button className="Form-button" onClick={() => setFilter(Filter.name)}>Buscar por Nombre</button>
+                  <input
+                    type="text"
+                    placeholder="Search task"
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                  <button
+                    className="Form-button"
+                    onClick={() => setFilter(Filter.name)}
+                  >
+                    Submit
+                  </button>
                 </div>
               </div>
             </aside>
