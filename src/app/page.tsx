@@ -10,10 +10,9 @@ import { v4 as uuidv4 } from "uuid";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import { title } from "process";
+
 
 export default function Home() {
-  
   const [taskList, setTaskList] = useState<Task[]>([]);
 
   // useEffect para cargar las tareas desde la API
@@ -64,7 +63,7 @@ export default function Home() {
     id: string,
     newTitle: string,
     newDescription: string,
-    newDate: string,
+    newDate: string
   ) => {
     try {
       const response = await fetch("/api/todos/modifyTask", {
@@ -90,7 +89,12 @@ export default function Home() {
         setTaskList((prevTasks) => {
           return prevTasks.map((task) =>
             task.id === id
-              ? { ...task, title: newTitle, description: newDescription, date: newDate } // Modifica la tarea con el 'id' correspondiente
+              ? {
+                  ...task,
+                  title: newTitle,
+                  description: newDescription,
+                  date: newDate,
+                } // Modifica la tarea con el 'id' correspondiente
               : task
           );
         });
@@ -107,7 +111,12 @@ export default function Home() {
     newDate: string
   ) => {
     changevispop2(); // Abre el PopUp de edición
-    setCurrentTask({ id, title: newTitle, description: newDescription, date: newDate }); // Asigna los valores a los inputs
+    setCurrentTask({
+      id,
+      title: newTitle,
+      description: newDescription,
+      date: newDate,
+    }); // Asigna los valores a los inputs
   };
 
   let deleteCurrentTask = async (id: string) => {
@@ -176,9 +185,11 @@ export default function Home() {
     All,
     Done,
     NotDone,
+    name,
   }
 
   const [filter, setFilter] = useState<Filter>(Filter.All);
+  const [search, setSearch] = useState("");
 
   function filterList(tasks: Task[], filter: Filter): Task[] {
     switch (filter) {
@@ -188,6 +199,10 @@ export default function Home() {
         return tasks.filter((task) => task.done === true);
       case Filter.NotDone:
         return tasks.filter((task) => task.done === false);
+        case Filter.name:
+          return tasks.filter((task) =>
+            task.title.toLowerCase().includes(search.toLowerCase())
+          );
       default:
         throw new Error("Invalid filter");
     }
@@ -215,15 +230,14 @@ export default function Home() {
         }
         toggleDone={toggleDone}
         remove={(id) => deleteCurrentTask(id)}
-        modify={(id) => handlemodification(id, task.title, task.description, task.date)} // Aqui paso la tarea para modificar
+        modify={(id) =>
+          handlemodification(id, task.title, task.description, task.date)
+        } // Aqui paso la tarea para modificar
       />
     ));
 
   const [vispop2, setvispop2] = useState(false); //vista del segundo popUp
   const changevispop2 = () => setvispop2(!vispop2);
-
-  const [vispop3, setvispop3] = useState(false); //vista del calendario
-  const changevispop3 = () => setvispop3(!vispop3);
 
   const [visible, setVisible] = useState(false);
   const changeVisibility = () => setVisible(!visible);
@@ -274,7 +288,11 @@ export default function Home() {
     changeVisibility();
   };
 
-  const handleEditSubmit = (title: string, description: string, date: string) => {
+  const handleEditSubmit = (
+    title: string,
+    description: string,
+    date: string
+  ) => {
     modifyCurrentTask(currentTask.id, title, description, date);
     changevispop2();
   };
@@ -359,7 +377,8 @@ export default function Home() {
                         })
                       }
                     />
-                    <input className="normal"
+                    <input
+                      className="normal"
                       type="text"
                       maxLength={10}
                       value={currentTask.date}
@@ -384,7 +403,11 @@ export default function Home() {
                     To Do
                   </Button>
                 </div>
-                
+
+                <div>
+                  <input type="text" placeholder="Search task"  onChange={(e) => setSearch(e.target.value)}/>
+                  <button className="Form-button" onClick={() => setFilter(Filter.name)}>Buscar por Nombre</button>
+                </div>
               </div>
             </aside>
             <section>
