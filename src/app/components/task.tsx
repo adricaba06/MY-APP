@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "./button";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export interface Task {
   title: string;
@@ -50,7 +50,7 @@ export function TaskComponent({
       >
         {done ? "Done!" : "Set as done"}
       </Button>
-      
+
       <div className="acciones">
         <button
           className="del"
@@ -58,6 +58,7 @@ export function TaskComponent({
             event.stopPropagation();
             remove(id);
           }}
+          data-testid="delete-button"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -77,6 +78,7 @@ export function TaskComponent({
             event.stopPropagation();
             modify(id);
           }}
+          data-testid="modify-button"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

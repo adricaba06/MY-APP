@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import Form from './Form'
-import Button from './button';
 
-interface popUpProps{
+export interface popUpProps{
     isVisible: boolean;
     children: React.ReactNode; //Los componentes se pasan de esta forma, tener en cuenta
     
@@ -11,7 +9,7 @@ interface popUpProps{
 export default function PopUp({children, isVisible}: popUpProps){
 
   return (
-    <div className={ isVisible? 'popup-visible popup'  : 'popup-invisible'}>
+    <div className={ isVisible? 'popup-visible popup'  : 'popup-invisible'} data-testid="pop">
         {children} {} 
        
     </div>

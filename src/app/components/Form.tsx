@@ -2,7 +2,7 @@ import { act, useState } from "react"
 import React from 'react'
 
 
-interface formProps{
+ export interface formProps{
     submit: (title: string, description: string, date: string) => void;
 }
 
@@ -28,7 +28,7 @@ export default function Form({submit}: formProps) {
 
     <form onSubmit={() => {
         submit(values.title, values.description, values.date);
-    }}>
+    }} data-testid="form">
         <input
             type="text"
             name="title"
@@ -69,4 +69,5 @@ export default function Form({submit}: formProps) {
     
 
   )
-}
+};
+
