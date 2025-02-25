@@ -27,4 +27,4 @@ describe('PopUp', () =>{
         expect(PopUpElement).toHaveClass('popup-invisible');
     });
 
-})
+});

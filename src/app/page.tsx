@@ -6,8 +6,6 @@ import { TaskComponent } from "./components/task";
 import PopUp from "./components/popUp";
 import { useState, useEffect } from "react";
 import { Task } from "./components/task";
-import { v4 as uuidv4 } from "uuid";
-
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
@@ -59,7 +57,7 @@ export default function Home() {
   };
 
   let modifyCurrentTask = async (
-    id: string,
+    id: number,
     newTitle: string,
     newDescription: string,
     newDate: string
@@ -104,7 +102,7 @@ export default function Home() {
   };
 
   const handlemodification = (
-    id: string,
+    id: number,
     newTitle: string,
     newDescription: string,
     newDate: string
@@ -118,7 +116,7 @@ export default function Home() {
     }); // Asigna los valores a los inputs
   };
 
-  let deleteCurrentTask = async (id: string) => {
+  let deleteCurrentTask = async (id: number) => {
     try {
       const response = await fetch("/api/todos/deleteTask", {
         method: "DELETE",
@@ -140,7 +138,7 @@ export default function Home() {
     }
   };
 
-  const toggleDone = async (id: string) => {
+  const toggleDone = async (id: number) => {
     setTaskList(
       // no voy a borrar esto porq en verdad hace que se vea inmediatamente en el fronted
       taskList.map((task) =>
@@ -243,12 +241,12 @@ export default function Home() {
 
   //ESTADO PARA EL PUÑETERO FORMULARIO
   const [currentTask, setCurrentTask] = useState<{
-    id: string;
+    id: number;
     title: string;
     description: string;
     date: string;
   }>({
-    id: "",
+    id: 0,
     title: "",
     description: "",
     date: "",
@@ -260,8 +258,7 @@ export default function Home() {
     selecionada: boolean,
     date: string
   ) => {
-    const newTask: Task = {
-      id: uuidv4(),
+    const newTask: Omit<Task, 'id'> = {
       title,
       description,
       selecionada,
@@ -277,6 +274,13 @@ export default function Home() {
         },
         body: JSON.stringify(newTask),
       });
+
+      if (response.ok) {
+        const createdTask = await response.json();
+        setTaskList([...taskList, createdTask]);
+      } else {
+        console.error("Error al añadir la tarea");
+      }
     } catch (error) {
       console.error("Error al añadir la tarea", error);
     }

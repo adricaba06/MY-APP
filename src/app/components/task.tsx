@@ -5,17 +5,17 @@ import { useEffect, useState } from "react";
 export interface Task {
   title: string;
   description: string;
-  id: string;
+  id: number;
   selecionada: boolean;
   done: boolean;
   date: string;
 }
 
 export interface TaskProps extends Task {
-  changeSelect: (id: string) => void;
-  toggleDone: (id: string) => void;
-  remove: (id: string) => void;
-  modify: (id: string) => void;
+  changeSelect: (id: number) => void;
+  toggleDone: (id: number) => void;
+  remove: (id: number) => void;
+  modify: (id: number) => void;
 }
 
 export function TaskComponent({

@@ -6,6 +6,11 @@
 import type {Config} from 'jest';
 
 const config: Config = {
+
+  // testEnvironmentOptions: {
+  //   customExportConditions: [] // don't load "browser" field
+  // },
+
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 

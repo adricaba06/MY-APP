@@ -6,7 +6,7 @@ import { TaskComponent, TaskProps } from '../src/app/components/task';
 const mockProps: TaskProps = {
   title: 'Test Task',
   description: 'This is a test task',
-  id: '1',
+  id: 1,
   selecionada: false,
   done: false,
   date: '2025-02-24',
@@ -19,6 +19,22 @@ const mockProps: TaskProps = {
 describe('TaskComponent', () => {
   it('renders task with title and description', () => {
     render(<TaskComponent {...mockProps} />);
+    const titleElement = screen.getByText('Test Task');
+    const descriptionElement = screen.getByText('This is a test task');
+    expect(titleElement).toBeInTheDocument();
+    expect(descriptionElement).toBeInTheDocument();
+  });
+
+  it('renders task when done is true', () => {
+    render(<TaskComponent {...mockProps} done={true} />);
+    const titleElement = screen.getByText('Test Task');
+    const descriptionElement = screen.getByText('This is a test task');
+    expect(titleElement).toBeInTheDocument();
+    expect(descriptionElement).toBeInTheDocument();
+  });
+
+  it('renders task when selected is true', () => {
+    render(<TaskComponent {...mockProps} selecionada={true}/>);
     const titleElement = screen.getByText('Test Task');
     const descriptionElement = screen.getByText('This is a test task');
     expect(titleElement).toBeInTheDocument();
