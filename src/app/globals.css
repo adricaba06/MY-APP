@@ -363,7 +363,6 @@ input {
 .calendario {
   margin-left: 30%;
   width: 50%;
-
   position: fixed;
   top: 10%;
   left: 69%;
@@ -372,12 +371,12 @@ input {
   border-radius: 10px;
   border: 1px solid white;
   transition: all 0.5s ease;
+  z-index: 10;
 }
 
 .calendario:hover {
   margin-left: 30%;
   width: 50%;
-
   position: fixed;
   top: 10%;
   left: 20%;
@@ -386,25 +385,44 @@ input {
   border-radius: 10px;
   border: 1px solid white;
   transition: all 0.5s ease;
+  z-index: 20;
+}
+.rbc-event {
+  background-color: #84e2ff; /* Cambia el color de fondo de los eventos */
+  color: white; /* Cambia el color del texto de los eventos */
+  border-radius: 4px; /* Añade bordes redondeados a los eventos */
+  padding: 4px; /* Añade padding a los eventos */
 }
 
-/* Cambiar el color de fondo de los botones de navegación */
-.fc-button {
-  background-color: #db7f67 !important;
-  color: white !important;
-  border: none !important;
+/* Estilo para los días del calendario */
+.rbc-day-bg {
+  background-color: #ffffff; /* Cambia el color de fondo de los días */
 }
 
-.fc-button:hover {
-  background-color: #c70039 !important;
+/* Estilo para los días seleccionados */
+.rbc-selected-cell {
+  background-color: #ffeb3b !important; /* Cambia el color de fondo de los días seleccionados */
 }
 
-/* Cambiar color cuando el botón está activo */
-.fc-button-active {
-  background-color: #900c3f !important;
+/* Estilo para el encabezado del calendario */
+.rbc-toolbar {
+  background-color: #a37b73; /* Cambia el color de fondo del encabezado */
+  color: white; /* Cambia el color del texto del encabezado */
+  padding: 10px; /* Añade padding al encabezado */
+  border-radius: 4px; /* Añade bordes redondeados al encabezado */
 }
-/*aparentemente !important le da prioridad*/
 
-.footer {
-  background-color: #db7f67;
+/* Estilo para los botones del encabezado */
+.rbc-btn-group button {
+  background-color: #a37b73; /* Cambia el color de fondo de los botones */
+  color: white; /* Cambia el color del texto de los botones */
+  border: none; /* Elimina el borde de los botones */
+  margin: 0 5px; /* Añade margen entre los botones */
+  padding: 5px 10px; /* Añade padding a los botones */
+  border-radius: 4px; /* Añade bordes redondeados a los botones */
+}
+
+/* Estilo para los botones del encabezado al pasar el ratón */
+.rbc-btn-group button:hover {
+  background-color: #a6ff00; /* Cambia el color de fondo de los botones al pasar el ratón */
 }

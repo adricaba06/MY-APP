@@ -6,8 +6,11 @@ import { TaskComponent } from "./components/task";
 import PopUp from "./components/popUp";
 import { useState, useEffect } from "react";
 import { Task } from "./components/task";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
+import moment from "moment";
+import { Calendar, momentLocalizer } from "react-big-calendar"; // Importar react-big-calendar
+import "react-big-calendar/lib/css/react-big-calendar.css"; // Estilos de React Big Calendar
+
+const localizer = momentLocalizer(moment);
 
 export default function Home() {
   const [taskList, setTaskList] = useState<Task[]>([]);
@@ -258,7 +261,7 @@ export default function Home() {
     selecionada: boolean,
     date: string
   ) => {
-    const newTask: Omit<Task, 'id'> = {
+    const newTask: Omit<Task, "id"> = {
       title,
       description,
       selecionada,
@@ -299,6 +302,14 @@ export default function Home() {
     modifyCurrentTask(currentTask.id, title, description, date);
     changevispop2();
   };
+
+  // Convertir las tareas en eventos compatibles con react-big-calendar
+  const events = taskList.map((task) => ({
+    title: task.title,
+    start: new Date(task.date),
+    end: new Date(task.date),
+    allDay: true,
+  }));
 
   return (
     <>
@@ -427,19 +438,18 @@ export default function Home() {
               <div className="recuadroTareas">{showList()}</div>
             </section>
           </div>
-          <div className="calendario">
-            <FullCalendar
-              plugins={[dayGridPlugin]}
-              initialView="dayGridMonth"
-              events={filteredTasks.map((task) => ({
-                title: task.title,
-                start: new Date(task.date),
-                color: task.done ? "#618f5b" : "#94374b",
-                allDay: true,
-              }))}
-            />
-          </div>
+          
         </main>
+        <div className="calendario">
+        <Calendar
+            localizer={localizer}
+            events={events} // Los eventos convertidos a formato compatible
+            startAccessor="start"
+            endAccessor="end"
+            titleAccessor="title" // Esto asegura que se muestre el título en la celda del evento
+            style={{ height: 500, width: 700 }} // Tamaño del calendario
+          />
+        </div>
         <footer className="footer">
           <p>
             © 2025 Adrián Caballero Torrebejano. Todos los derechos reservados.

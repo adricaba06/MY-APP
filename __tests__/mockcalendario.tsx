@@ -1,0 +1,1 @@
+export default jest.fn(() => <div>Mock FullCalendar</div>);
