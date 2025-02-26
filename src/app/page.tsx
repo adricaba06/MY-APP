@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { Task } from "./components/task";
 import moment from "moment";
 import { Calendar, momentLocalizer } from "react-big-calendar"; // Importar react-big-calendar
-import "react-big-calendar/lib/css/react-big-calendar.css"; // Estilos de React Big Calendar
+//import "react-big-calendar/lib/css/react-big-calendar.css"; // Estilos de React Big Calendar
 
 const localizer = momentLocalizer(moment);
 
@@ -20,13 +20,23 @@ export default function Home() {
     const fetchTaskList = async () => {
       try {
         const response = await fetch("/api/todos");
-        const data = await response.json();
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+  
+        const text = await response.text();
+        console.log("API Response:", text); // 👀 Ver qué llega de la API
+  
+        // Asegurar que solo intentamos parsear si hay contenido
+        const data = text ? JSON.parse(text) : [];
+  
         setTaskList(data);
       } catch (error) {
         console.error("Error al obtener las tareas", error);
       }
     };
-
+  
     fetchTaskList();
   }, []);
 
