@@ -24,5 +24,5 @@ export default async function handleDelete(
   } catch (error) {
     console.error("Error deleting task:", error);
     return res.status(500).json({ message: "Internal Server Error" });
-  }
-}
+  };
+};
