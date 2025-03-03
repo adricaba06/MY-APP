@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { pool } from "@/db/pool";
+import { getClient } from "@/db/pool";
 
 export default async function handleDelete(
   req: NextApiRequest,
@@ -19,7 +19,7 @@ export default async function handleDelete(
       return res.status(400).json({ message: "Missing required fields" });
     }
     const query = `DELETE FROM todos WHERE id = $1;`;
-    await pool.query(query, [id]); //ejecutamos la query en la base de datos
+    await getClient().query).query(query, [id]); //ejecutamos la query en la base de datos
     res.status(201).json({ message: "Task deleted successfully" });
   } catch (error) {
     console.error("Error deleting task:", error);
