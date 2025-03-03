@@ -1,4 +1,3 @@
-
 import { Client } from "pg";
 import "dotenv/config";  // Asegúrate de que dotenv está configurado correctamente
 
@@ -28,5 +27,3 @@ const testConnection = async () => {
 // Ejecutar la prueba de conexión (opcional, no es necesario si solo quieres usar el pool)
 testConnection();
 */
-
-

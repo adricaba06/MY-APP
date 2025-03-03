@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Consulta para actualizar la tarea
     const query = `UPDATE todos SET title = $1, description = $2 WHERE id = $3`;
-    await pool.query(query, [title, description, id,]);
+    await getClient().query(query, [title, description, id,]);
 
     res.status(200).json({ message: "Task updated successfully" });
   } catch (error) {

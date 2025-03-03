@@ -41,5 +41,3 @@ export default async function handler(
 // el endpoint es /api/todos    y se puede acceder a el mediante una peticion GET
 // para obtener todas las tareas de la base de datos y devolverlas en formato JSON  en la respuesta de la peticion
 // el handler de la api se encarga de manejar las solicitudes GET para obtener todas las tareas
-
-

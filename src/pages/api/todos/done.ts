@@ -18,7 +18,7 @@ export default async function handleToggleDone(
       }
       
     const query = `UPDATE todos SET done = NOT done WHERE id = $1;`;
-    await pool.query(query, [id]); //ejecutamos la query en la base de datos
+    await getClient().query(query, [id]); //ejecutamos la query en la base de datos
     res.status(201).json({ message: "Task changed successfully" });
   } catch (error) {
     console.error("Error deleting task:", error);
