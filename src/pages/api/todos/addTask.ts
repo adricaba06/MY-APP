@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { pool } from "@/db/pool";
+import { getClient } from "../../../db/pool";
 
 export default async function handler(
   req: NextApiRequest,
@@ -23,7 +23,7 @@ export default async function handler(
       return res.status(400).json({ message: "Missing required fields" });
     }
     const query = `INSERT INTO todos (title, description, selecionada, done, date) VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
-    const result = await pool.query(query, [title, description, selecionada, done, date]); //ejecutamos la query en la base de datos
+    const result = await getClient().query(query, [title, description, selecionada, done, date]); //ejecutamos la query en la base de datos
     res.status(201).json(result.rows[0]); // Devolver la tarea creada
   } catch (error) {
     console.error("Error adding task:", error);

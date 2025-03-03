@@ -388,7 +388,7 @@ input {
   z-index: 20;
 }
 .rbc-event {
-  background-color: #84e2ff; /* Cambia el color de fondo de los eventos */
+  background-color: #a37b73 !important; /* Cambia el color de fondo de los eventos */
   color: white; /* Cambia el color del texto de los eventos */
   border-radius: 4px; /* Añade bordes redondeados a los eventos */
   padding: 4px; /* Añade padding a los eventos */
@@ -401,7 +401,7 @@ input {
 
 /* Estilo para los días seleccionados */
 .rbc-selected-cell {
-  background-color: #ffeb3b !important; /* Cambia el color de fondo de los días seleccionados */
+  background-color: #776774 !important; /* Cambia el color de fondo de los días seleccionados */
 }
 
 /* Estilo para el encabezado del calendario */
@@ -414,7 +414,7 @@ input {
 
 /* Estilo para los botones del encabezado */
 .rbc-btn-group button {
-  background-color: #a37b73; /* Cambia el color de fondo de los botones */
+  background-color: #a37b73 !important; /* Cambia el color de fondo de los botones */
   color: white; /* Cambia el color del texto de los botones */
   border: none; /* Elimina el borde de los botones */
   margin: 0 5px; /* Añade margen entre los botones */
@@ -425,4 +425,95 @@ input {
 /* Estilo para los botones del encabezado al pasar el ratón */
 .rbc-btn-group button:hover {
   background-color: #a6ff00; /* Cambia el color de fondo de los botones al pasar el ratón */
+}
+
+footer {
+  background-color: #db7f67;
+}
+
+@media (max-width: 768px) {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .onlyIcon {
+    font-size: 0px;
+  }
+  /* Ajustamos el tamaño del título */
+  h1 {
+    font-size: 18px; /* En pantallas pequeñas, el tamaño será menor */
+  }
+
+  /* Ajuste de las tarjetas (task y doneTask) */
+  .task,
+  .doneTask {
+    width: 200px; /* Las tarjetas ocuparán todo el ancho disponible */
+    margin-left: 0; /* Eliminar margen izquierdo */
+    margin-right: 0; /* Eliminar margen derecho */
+    padding: 10px; /* Reducir el padding para ahorrar espacio */
+    margin-bottom: 15px; /* Añadir algo de espacio entre tarjetas */
+  }
+
+  /* Ajustar el tamaño de los textos dentro de las tarjetas */
+  .task h4,
+  .doneTask h4 {
+    font-size: 12px; /* Reducir el tamaño de los textos */
+  }
+
+  .task h2,
+  .doneTask h2 {
+    font-size: 14px; /* Ajustamos el tamaño del título de las tareas */
+  }
+
+  /* Ajuste de los botones en las tarjetas */
+  .task > .boton,
+  .doneTask > .boton {
+    margin-top: 15px; /* Reducir el margen superior */
+    width: 120px; /* El botón ocupará todo el ancho disponible */
+    font-size: 10px; /* Ajustar tamaño del texto del botón */
+    margin-left: 10px;
+  }
+
+  /* Para permitir el scroll si hay muchos elementos */
+  .task,
+  .doneTask {
+    max-height: 270px; /* Reduce la altura máxima */
+  }
+
+  /* Ajustes del aside en el contenido principal */
+  .contenidoPrincipal aside {
+    width: 70px; /* Hacer que el aside ocupe todo el ancho en móvil */
+    padding: 10px; /* Reducir el padding */
+    margin-bottom: 20px; /* Añadir margen inferior para separación */
+  }
+
+  /* Ajustes de los botones dentro del aside */
+  .contenidoPrincipal aside button {
+    margin-top: 20px;
+    width: 60px; /* Reducir el tamaño del botón */
+    font-size: 12px; /* Reducir el tamaño de la fuente */
+    height: 50px; /* Ajustar la altura del botón */
+    margin-left: -8px; /* Eliminar el margen negativo */
+    padding: 10px; /* Asegurarse de que haya espacio dentro del botón */
+  }
+
+  /* Ajustes del recuadroTareas */
+  .recuadroTareas {
+    width: 100%; /* Ajustamos el ancho al 100% */
+    padding: 3px; /* Añadir algo de padding */
+    flex-wrap: wrap;
+    margin-bottom: 15px; /* Espacio entre los recuadros */
+  }
+
+  /* Mejorar la visibilidad de los recuadros en móvil */
+  .recuadroTareas > div {
+    margin: 20px; /* Añadir un poco de margen entre los recuadros */
+    width: 100%; /* Hacer que los elementos ocupen el ancho completo */
+  }
+
+  .calendario {
+    display: none;
+  }
 }

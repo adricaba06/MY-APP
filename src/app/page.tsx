@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { Task } from "./components/task";
 import moment from "moment";
 import { Calendar, momentLocalizer } from "react-big-calendar"; // Importar react-big-calendar
-//import "react-big-calendar/lib/css/react-big-calendar.css"; // Estilos de React Big Calendar
+import "react-big-calendar/lib/css/react-big-calendar.css"; // Estilos de React Big Calendar
 
 const localizer = momentLocalizer(moment);
 
@@ -26,7 +26,7 @@ export default function Home() {
         }
   
         const text = await response.text();
-        console.log("API Response:", text); // 👀 Ver qué llega de la API
+        console.log("API Response:", text); 
   
         // Asegurar que solo intentamos parsear si hay contenido
         const data = text ? JSON.parse(text) : [];
@@ -331,7 +331,7 @@ export default function Home() {
                 {/*Crud*/}
                 <div className="principales">
                   <Button onClick={() => changeVisibility()}>
-                    New Task{" "}
+                    <span className="onlyIcon">New Task{" "}</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -345,7 +345,7 @@ export default function Home() {
                   </Button>
 
                   <Button onClick={deleteTask}>
-                    Delete Task{" "}
+                  <span className="onlyIcon">Delete Task{" "}</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"

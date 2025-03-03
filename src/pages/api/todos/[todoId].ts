@@ -1,4 +1,4 @@
-import { pool } from '@/db/pool';
+import { getClient } from "../../../db/pool";
 import { NextApiRequest, NextApiResponse } from 'next';
 
 interface Task {
@@ -15,7 +15,8 @@ const getTodo = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     // Query para obtener la tarea
-    const result = await pool.query('SELECT * FROM todos WHERE id = $1', [todoId]);
+    const client = getClient();
+    const result = await client.query('SELECT * FROM todos WHERE id = $1', [todoId]);
     const todo = result.rows[0];
 
     if (!todo) {
