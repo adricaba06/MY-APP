@@ -20,25 +20,26 @@ export default function Home() {
     const fetchTaskList = async () => {
       try {
         const response = await fetch("/api/todos");
-  
+
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-  
-        const text = await response.text();
-        console.log("API Response:", text); 
-  
-        // Asegurar que solo intentamos parsear si hay contenido
-        const data = text ? JSON.parse(text) : [];
-  
+
+        const data = await response.json();
+        console.log("API Response:", data);
+
         setTaskList(data);
       } catch (error) {
         console.error("Error al obtener las tareas", error);
       }
     };
-  
+
     fetchTaskList();
   }, []);
+
+  useEffect(() => {
+    console.log("Task List Updated:", taskList);
+  }, [taskList]);
 
   const deleteTask = async () => {
     if (taskList.some((task) => task.selecionada === true)) {
@@ -152,44 +153,37 @@ export default function Home() {
   };
 
   const toggleDone = async (id: number) => {
-    setTaskList(
-      // no voy a borrar esto porq en verdad hace que se vea inmediatamente en el fronted
-      taskList.map((task) =>
-        task.id === id ? { ...task, done: !task.done } : task
-      )
+    // Obtener el estado actualizado antes de modificarlo
+    const updatedTaskList = taskList.map((task) =>
+      task.id === id ? { ...task, done: !task.done } : task
     );
-
+  
+    setTaskList(updatedTaskList); // Actualizar el frontend inmediatamente
+  
     try {
-      const response = await fetch("/api/todos/done", {
-        method: "PUT",
+      const response = await fetch("http://localhost:3000/api/todos/done", {
+        method: "PUT",  
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           id,
-          done: taskList.find((task) => task.id === id)?.done, // Busca la tarea por su 'id' y obtiene el valor actual de 'done'
+          done: updatedTaskList.find((task) => task.id === id)?.done,
         }),
       });
-
+  
       if (!response.ok) {
         console.error("Error al cambiar el estado de la tarea");
-        // Volver al estado anterior
-        setTaskList(
-          taskList.map((task) =>
-            task.id === id ? { ...task, done: !task.done } : task
-          )
-        );
+        // Si falla, revertir el cambio
+        setTaskList(taskList);
       }
     } catch (error) {
-      console.error("Error al cambiar el estado de la tarea", error);
+      console.error("Error en la solicitud:", error);
       // En caso de error, revertir el cambio
-      setTaskList(
-        taskList.map((task) =>
-          task.id === id ? { ...task, done: !task.done } : task
-        )
-      );
+      setTaskList(taskList);
     }
   };
+
 
   enum Filter {
     All,
@@ -321,6 +315,8 @@ export default function Home() {
     allDay: true,
   }));
 
+  console.log("Events:", events);
+
   return (
     <>
       <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -345,7 +341,7 @@ export default function Home() {
                   </Button>
 
                   <Button onClick={deleteTask}>
-                  <span className="onlyIcon">Delete Task{" "}</span>
+                    <span className="onlyIcon">Delete Task{" "}</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"

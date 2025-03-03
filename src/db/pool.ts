@@ -14,7 +14,6 @@ export function getClient() {
   return client;
 }
 
-/*
 const testConnection = async () => {
   try {
     const res = await getClient().query("SELECT NOW()");
@@ -26,4 +25,3 @@ const testConnection = async () => {
 
 // Ejecutar la prueba de conexión (opcional, no es necesario si solo quieres usar el pool)
 testConnection();
-*/

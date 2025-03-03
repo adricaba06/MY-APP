@@ -12,10 +12,11 @@ interface Task {
 
 const getTodo = async (req: NextApiRequest, res: NextApiResponse) => {
   const { todoId } = req.query;
+  const client = getClient();
 
   try {
+    await client.connect();
     // Query para obtener la tarea
-    const client = getClient();
     const result = await client.query('SELECT * FROM todos WHERE id = $1', [todoId]);
     const todo = result.rows[0];
 
@@ -25,8 +26,10 @@ const getTodo = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json(todo);
   } catch (err) {
-    console.error(err);
+    console.error("Error al obtener la tarea:", err);
     return res.status(500).json({ message: 'Error al obtener la tarea' });
+  } finally {
+    await client.end();
   }
 };
 

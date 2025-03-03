@@ -11,33 +11,32 @@ interface Task {
 
 // Handler para obtener todas las tareas desde la base de datos
 export const getTodos = async (req: NextApiRequest, res: NextApiResponse) => {
+  const client = getClient();
   try {
-    // Realiza la consulta a la base de datos
-    const client = getClient();
-    console.log("11111", client);
+    await client.connect();
     const result = await client.query("SELECT * FROM todos");
-    console.log("22222", result);
     const todos: Task[] = result.rows;
     return res.status(200).json(todos);
   } catch (err) {
-    console.error(err);
+    console.error("Error al obtener las tareas:", err);
     return res.status(500).json({ message: "Error al obtener las tareas" });
+  } finally {
+    await client.end();
   }
 };
 
 // Este handler maneja las solicitudes GET para obtener todas las tareas
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method === "GET") {
-    return await getTodos(req, res);
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const client = getClient();
+  try {
+    await client.connect();
+    const result = await client.query("SELECT * FROM todos");
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+    res.status(500).json({ error: "Error fetching tasks" });
+  } finally {
+    await client.end();
   }
-
-  res.status(405).json({ message: "Método no permitido" });
 }
-
-// esto es el endpoint de la api que se encarga de obtener todas las tareas de la base de datos
-// el endpoint es /api/todos    y se puede acceder a el mediante una peticion GET
-// para obtener todas las tareas de la base de datos y devolverlas en formato JSON  en la respuesta de la peticion
-// el handler de la api se encarga de manejar las solicitudes GET para obtener todas las tareas
