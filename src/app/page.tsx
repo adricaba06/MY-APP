@@ -157,12 +157,12 @@ export default function Home() {
     const updatedTaskList = taskList.map((task) =>
       task.id === id ? { ...task, done: !task.done } : task
     );
-  
+
     setTaskList(updatedTaskList); // Actualizar el frontend inmediatamente
-  
+
     try {
       const response = await fetch("http://localhost:3000/api/todos/done", {
-        method: "PUT",  
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -171,7 +171,7 @@ export default function Home() {
           done: updatedTaskList.find((task) => task.id === id)?.done,
         }),
       });
-  
+
       if (!response.ok) {
         console.error("Error al cambiar el estado de la tarea");
         // Si falla, revertir el cambio
@@ -183,7 +183,6 @@ export default function Home() {
       setTaskList(taskList);
     }
   };
-
 
   enum Filter {
     All,
@@ -259,12 +258,7 @@ export default function Home() {
     date: "",
   });
 
-  const addTask = async (
-    title: string,
-    description: string,
-    selecionada: boolean,
-    date: string
-  ) => {
+  const addTask = async (title: string, description: string, selecionada: boolean, date: string) => {
     const newTask: Omit<Task, "id"> = {
       title,
       description,
@@ -272,21 +266,23 @@ export default function Home() {
       done: false,
       date,
     };
-
+  
     try {
       const response = await fetch("/api/todos/addTask", {
-        method: "POST", //se usa para Crear nuevos recursos en el servidor (por ejemplo, agregar una tarea, registrar un usuario, enviar un formulario).
+        method: "POST", // Asegúrate de que sea POST
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newTask),
       });
-
+  
       if (response.ok) {
         const createdTask = await response.json();
+        console.log("Tarea creada:", createdTask);
         setTaskList([...taskList, createdTask]);
       } else {
-        console.error("Error al añadir la tarea");
+        const errorData = await response.json();
+        console.error("Error al añadir la tarea:", errorData);  // Verificar el error detallado
       }
     } catch (error) {
       console.error("Error al añadir la tarea", error);
@@ -327,7 +323,7 @@ export default function Home() {
                 {/*Crud*/}
                 <div className="principales">
                   <Button onClick={() => changeVisibility()}>
-                    <span className="onlyIcon">New Task{" "}</span>
+                    <span className="onlyIcon">New Task </span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -341,7 +337,7 @@ export default function Home() {
                   </Button>
 
                   <Button onClick={deleteTask}>
-                    <span className="onlyIcon">Delete Task{" "}</span>
+                    <span className="onlyIcon">Delete Task </span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -444,10 +440,9 @@ export default function Home() {
               <div className="recuadroTareas">{showList()}</div>
             </section>
           </div>
-          
         </main>
         <div className="calendario">
-        <Calendar
+          <Calendar
             localizer={localizer}
             events={events} // Los eventos convertidos a formato compatible
             startAccessor="start"
